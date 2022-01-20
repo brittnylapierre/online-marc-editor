@@ -1,11 +1,5 @@
 {
     "require": {
-        "php": "~7.4",
-        "ext-yaz": "*"
-    },
-    "config": {
-        "allow-plugins": {
-            "kylekatarnls/update-helper": false
-        }
+        "php": "~7.4"
     }
 }
