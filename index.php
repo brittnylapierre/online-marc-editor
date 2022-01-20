@@ -17,7 +17,7 @@
   <body>
         <header class="p-5 pb-0">
             <h1>Online MARC Editor</h1>
-            <p>An online editor to create MARC records</p>
+            <p>An online editor to create MARC records (<a href="https://www.loc.gov/marc/bibliographic/bdapndxc.html" target="_blank">Minimal Level Record</a>)</p>
         </header>
         <main>
             <div id="editor">
@@ -28,6 +28,7 @@
 
                         <button v-on:click="ldrShow = !ldrShow" type="button" class="btn btn-primary">LDR</button>
                         <button v-on:click="doiShow = !doiShow" type="button" class="btn btn-primary">DOI</button>
+
                         <!-- DOI -->
                         <div v-show="doiShow" class="alert alert-warning alert-dismissible fade show" role="alert">
                             <div class="alert alert-warning" role="alert" v-if="loadingDOI">
@@ -47,6 +48,7 @@
                             </div>
                         </div>
                         <!-- /DOI -->
+                        <!-- LDR -->
                         <div v-show="ldrShow" class="alert alert-warning alert-dismissible fade show" role="alert">
                             <label for="record_status">Record status</label>
                             <select class="form-select" aria-label="Record status" id="record_status" v-model="ldr.record_status">
@@ -133,10 +135,11 @@
                             </select>
                             <button type="button" class="btn-close" v-on:click="ldrShow = !ldrShow" aria-label="Close"></button>
                         </div>
+                        <!-- /LDR -->
 
 
                         <br/><br/>
-
+                        <!-- TITLE -->
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="title">Title</span>
                             <div class="input-group-prepend">
@@ -161,15 +164,18 @@
                             </div>
                             <input type="text" id="title" v-model="record.title" class="form-control" aria-label="Title statement" aria-describedby="title">
                         </div>
+                        <!-- \TITLE -->
+                        <!-- SUBTITLE -->
                         <div class="input-group mb-3">
-                        <span class="input-group-text" id="title">Subtitle</span>
+                            <span class="input-group-text" id="title">Subtitle</span>
                             <input type="text" id="subtitle" v-model="record.subtitle" class="form-control" aria-label="Subtitle statement" aria-describedby="subtitle">
                         </div>
+                        <!-- \SUBTITLE -->
 
                         <h2>Predefined</h2>
                         <button type="button" class="btn btn-primary" @click="ldr.bibliographic_level='m';ldr.type_of_record='a'">Book</button>
                         <button type="button" class="btn btn-info" @click="ldr.bibliographic_level='s';ldr.type_of_record='a'">Serial</button>
-                        <button type="button" class="btn btn-success" @click="ldr.bibliographic_level='m';ldr.type_of_record='c'">Sheet Music</button>
+                        <button type="button" class="btn btn-success" @click="ldr.bibliographic_level='m';ldr.type_of_record='c'">Musical Score</button>
                     </div>
                     <div class="col-6 col-md-4">
                         <h2>MARC Record</h2>
@@ -218,6 +224,7 @@
                 },
                 crossrefRecord: null,
                 record: {
+                    _005: "",
                     title: "",
                     _245_ind1: '1',
                     _245_ind2: '0',
@@ -234,10 +241,14 @@
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
                     this.ldr.multipart_resource_record_level + '4500' +
+                    '\n=005  ' + this.record._005 +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '')
                 }
+            },
+            mounted() {
+                this.update005()
             },
             methods: {
                 copyTestingCode () {
@@ -280,6 +291,10 @@
                         this.errored = true;
                         })
                         .finally(() => (this.loadingDOI = false));
+                },
+                update005() {
+                    let today = new Date().toISOString().replace('-', '').replace('-', '').replace('T', '').replace(':', '').replace(':', '').substr(0,16);
+                    this.record._005 = today
                 }
             }
         })
