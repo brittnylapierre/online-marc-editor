@@ -139,7 +139,10 @@
                             </div>
                             <input type="text" id="title" v-model="record.title" class="form-control" aria-label="Title statement" aria-describedby="title">
                         </div>
-
+                        <div class="input-group mb-3">
+                        <span class="input-group-text" id="title">Subtitle</span>
+                            <input type="text" id="subtitle" v-model="record.subtitle" class="form-control" aria-label="Subtitle statement" aria-describedby="subtitle">
+                        </div>
 
                         <h2>Predefined</h2>
                         <button type="button" class="btn btn-primary" @click="ldr.bibliographic_level='m';ldr.type_of_record='a'">Book</button>
@@ -193,7 +196,8 @@
                 record: {
                     title: "",
                     _245_ind1: '1',
-                    _245_ind2: '0'
+                    _245_ind2: '0',
+                    subtitle: null
                 },
                 copySuccessful: false,
                 current_ldr: null,
@@ -204,7 +208,8 @@
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
                     this.ldr.multipart_resource_record_level + '4500' + 
-                    '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title
+                    '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
+                    (this.record.subtitle ? '$b' + this.record.subtitle : '')
                 }
             },
             methods: {
