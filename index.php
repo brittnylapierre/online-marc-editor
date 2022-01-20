@@ -10,7 +10,7 @@
 
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <title>Online MARC Editor</title>
   </head>
@@ -24,7 +24,29 @@
 
                 <div class="row">
                     <div class="col-md-8 p-5 pt-2" >
+                        
+
                         <button v-on:click="ldrShow = !ldrShow" type="button" class="btn btn-primary">LDR</button>
+                        <button v-on:click="doiShow = !doiShow" type="button" class="btn btn-primary">DOI</button>
+                        <!-- DOI -->
+                        <div v-show="doiShow" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <div class="alert alert-warning" role="alert" v-if="loadingDOI">
+                                Buscando dados do DOI na Crossref ...
+                            </div>
+                            <div class="m-3">
+                                <label for="doi" class="form-label">DOI</label>
+                                <input
+                                type="text"
+                                class="form-control"
+                                v-model="record.doi"
+                                id="doi"
+                                name="doi"
+                                placeholder="Digite o DOI"
+                                />
+                                <button class="btn btn-info btn-sm m-2" @click="getDOI(record.doi), loadingDOI = true">Recuperar dados de DOI na Crossref</button>
+                            </div>
+                        </div>
+                        <!-- /DOI -->
                         <div v-show="ldrShow" class="alert alert-warning alert-dismissible fade show" role="alert">
                             <label for="record_status">Record status</label>
                             <select class="form-select" aria-label="Record status" id="record_status" v-model="ldr.record_status">
@@ -181,6 +203,7 @@
 
             data: {                
                 ldrShow: false,
+                doiShow: false,
                 ldr:{
                     record_length: '00000',
                     record_status: 'n',
@@ -193,21 +216,25 @@
                     descriptive_cataloging_form: "a",
                     multipart_resource_record_level: "\\"
                 },
+                crossrefRecord: null,
                 record: {
                     title: "",
                     _245_ind1: '1',
                     _245_ind2: '0',
-                    subtitle: null
+                    subtitle: null,
+                    doi:null
                 },
                 copySuccessful: false,
                 current_ldr: null,
+                loadingDOI: false,
 
             },
             computed: {
                 complete_record: function(){
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
-                    this.ldr.multipart_resource_record_level + '4500' + 
+                    this.ldr.multipart_resource_record_level + '4500' +
+                    (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '')
                 }
@@ -230,7 +257,30 @@
                     /* unselect the range */
                     testingCodeToCopy.setAttribute('type', 'hidden')
                     window.getSelection().removeAllRanges()
-                 },
+                },
+                getDOI(doi) {
+                    axios
+                        .get("https://api.crossref.org/works/" + doi)
+                        .then((response) => {
+                        this.crossrefRecord = response,
+                        this.record.title = this.crossrefRecord.data.message.title
+                        // this.record.url = this.crossrefRecord.data.message.URL,
+                        // this.record.publisher[0].name = this.crossrefRecord.data.message.publisher,
+                        // this.record.copyrightYear = this.crossrefRecord.data.message.created.['date-parts'].[0].[0],
+                        // this.record.datePublished = this.crossrefRecord.data.message.issued.['date-parts'].[0].[0],
+                        // Object.values(this.crossrefRecord.data.message.author).forEach(val => {
+                        //     this.record.author.push({ id: "", name: val.given + " " + val.family, function: "Author" });
+                        // });
+                        // if (this.crossrefRecord.data.message.ISBN) {
+                        //     this.record.isbn[0].id = this.crossrefRecord.data.message.ISBN.[0]
+                        // }
+                        })
+                        .catch(function (error) {
+                        console.log(error);
+                        this.errored = true;
+                        })
+                        .finally(() => (this.loadingDOI = false));
+                }
             }
         })
     </script>
