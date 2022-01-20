@@ -180,6 +180,7 @@
                     bibliographic_level: 'm',
                     type_of_control: "\\",
                     character_coding_scheme: "a",
+                    base_address_of_data:'00000', 
                     encoding_level: "I",
                     descriptive_cataloging_form: "a",
                     multipart_resource_record_level: "\\"
@@ -194,11 +195,6 @@
 
             },
             computed: {
-                base_address_of_data: function(){
-                    return this.current_ldr
-                    ? this.current_ldr.substring(12,17)
-                    : '00000'
-                },
                 complete_record: function(){
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
