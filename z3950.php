@@ -1,7 +1,5 @@
 <?php
 
-var_dump($_GET["isbn"]);
-
 function parse_usmarc_string($record)
 {
     $ret = array();
