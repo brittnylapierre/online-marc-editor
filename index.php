@@ -31,7 +31,7 @@
                         <!-- DOI -->
                         <div v-show="doiShow" class="alert alert-warning alert-dismissible fade show" role="alert">
                             <div class="alert alert-warning" role="alert" v-if="loadingDOI">
-                                Buscando dados do DOI na Crossref ...
+                                Getting DOI data from CrossRef ...
                             </div>
                             <div class="m-3">
                                 <label for="doi" class="form-label">DOI</label>
@@ -41,9 +41,9 @@
                                 v-model="record.doi"
                                 id="doi"
                                 name="doi"
-                                placeholder="Digite o DOI"
+                                placeholder="DOI"
                                 />
-                                <button class="btn btn-info btn-sm m-2" @click="getDOI(record.doi), loadingDOI = true">Recuperar dados de DOI na Crossref</button>
+                                <button class="btn btn-info btn-sm m-2" @click="getDOI(record.doi), loadingDOI = true">Retrieve DOI data from CrossRef</button>
                             </div>
                         </div>
                         <!-- /DOI -->
