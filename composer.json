@@ -1,5 +1,11 @@
 {
     "require": {
-        "php": "~7.4"
+        "php": "~7.4",
+        "medlib/yaz": "^2.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     }
 }
