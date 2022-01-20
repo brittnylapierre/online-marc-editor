@@ -26,12 +26,8 @@
                     <div class="col-md-8 p-5 pt-2" >
                         <button v-on:click="ldrShow = !ldrShow" type="button" class="btn btn-primary">LDR</button>
                         <div v-show="ldrShow" class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <div class="mb-3">
-                                <label for="current_ldr" class="form-label">Paste current LDR values here:</label>
-                                <input v-model="current_ldr" type="text" class="form-control" id="current_ldr">
-                            </div>
                             <label for="record_status">Record status</label>
-                            <select class="form-select" aria-label="Record status" id="record_status" v-model="record_status">
+                            <select class="form-select" aria-label="Record status" id="record_status" v-model="ldr.record_status">
                                 <option value="a">Increase in encoding level</option>
                                 <option value="c">Corrected or revised</option>
                                 <option value="d">Deleted</option>
@@ -121,6 +117,26 @@
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="title">Title</span>
+                            <div class="input-group-prepend">
+                                <select class="input-group-text form-select" id="_245_ind1" v-model="record._245_ind1">
+                                    <option selected>Title added entry</option>
+                                    <option value="0">No added entry</option>
+                                    <option value="1">Added entry</option>
+                                </select>
+                            </div>
+                            <div class="input-group-prepend">
+                                <select class="input-group-text form-select" id="_245_ind2" v-model="record._245_ind2">
+                                    <option selected>Nonfiling characters</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                </select>
+                            </div>
                             <input type="text" id="title" v-model="record.title" class="form-control" aria-label="Title statement" aria-describedby="title">
                         </div>
 
@@ -155,9 +171,12 @@
         var app = new Vue({
             el: '#editor',
 
-            data: {
+            data: {                
                 ldrShow: false,
-                record_status: 'n',
+                ldr:{
+                    record_length: '00000',
+                    record_status: 'n'
+                },                
                 type_of_record: 'a',
                 bibliographic_level: 'm',
                 type_of_control: "\\",
@@ -166,45 +185,25 @@
                 descriptive_cataloging_form: "a",
                 multipart_resource_record_level: "\\",
                 record: {
-                    title: ""
+                    title: "",
+                    _245_ind1: '1',
+                    _245_ind2: '0'
                 },
                 copySuccessful: false,
                 current_ldr: null,
 
             },
-            mounted() {
-            },
-            watch: {
-                current_ldr: function (val) {
-                    this.record_status = val.substr(5,1),
-                    this.type_of_record = val.substr(6,1),
-                    this.bibliographic_level = val.substr(7,1),
-                    this.type_of_control = val.substr(8,1).replace(/\\/, "\\"),
-                    this.character_coding_scheme = val.substr(9,1).replace(/\\/, "\\"),
-                    this.encoding_level = val.substr(17,1).replace(/\\/, "\\"),
-                    this.descriptive_cataloging_form = val.substr(18,1).replace(/\\/, "\\"),
-                    this.multipart_resource_record_level = val.substr(19,1).replace(/\\/, "\\")
-                },
-            },
             computed: {
-                record_length: function(){
-                    return this.current_ldr
-                    ? this.current_ldr.substring(0,5)
-                    : '00000'
-                },
                 base_address_of_data: function(){
                     return this.current_ldr
                     ? this.current_ldr.substring(12,17)
                     : '00000'
                 },
-                copy: function(){
-                    return this.record_length + this.record_status + this.type_of_record + this.bibliographic_level + this.type_of_control + this.character_coding_scheme + '22' + this.base_address_of_data + this.encoding_level + this.descriptive_cataloging_form + this.multipart_resource_record_level + '4500'
-                },
                 complete_record: function(){
-                    return '\n=LDR  ' + this.record_length + this.record_status + this.type_of_record + this.bibliographic_level + this.type_of_control + 
+                    return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.type_of_record + this.bibliographic_level + this.type_of_control + 
                     this.character_coding_scheme + '22' + this.base_address_of_data + this.encoding_level + this.descriptive_cataloging_form + 
                     this.multipart_resource_record_level + '4500' + 
-                    '\n=245  10$a' + this.record.title
+                    '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title
                 }
             },
             methods: {
