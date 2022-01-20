@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+
+    <title>Online MARC Editor</title>
+  </head>
+  <body>
+    <main class="container">
+        <h1>Online MARC Editor</h1>
+        <p>An online editor to create MARC records</p>
+        <br/>
+        <div id="editor">
+
+            <div class="mb-3">
+                <label for="current_ldr" class="form-label">Paste current LDR values here:</label>
+                <input v-model="current_ldr" type="text" class="form-control" id="current_ldr">
+            </div>
+
+            <h2>{{ copy }} <span class="btn btn-info text-white copy-btn ml-auto" @click.stop.prevent="copyTestingCode">Copy</span></h2> 
+            <input type="hidden" id="copy" :value="copy">
+
+            <div class="alert alert-info" role="alert" v-if="copySuccessful">
+                Copied successful!
+            </div>
+             
+            <!-- <div class="mb-3">
+                <label for="record_length" class="form-label">Record length</label>
+                <input v-model="record_length" type="text" class="form-control" id="record_length">
+            </div> -->
+            <label for="record_status">Record status</label>
+            <select class="form-select" aria-label="Record status" id="record_status" v-model="record_status">
+                <option value="a">Increase in encoding level</option>
+                <option value="c">Corrected or revised</option>
+                <option value="d">Deleted</option>
+                <option value="n" selected>New</option>
+                <option value="p">Increase in encoding level from prepublication</option>
+            </select>
+            <label for="type_of_record">Type of record</label>
+            <select class="form-select" aria-label="Type of record" id="type_of_record" v-model="type_of_record">
+                <option value="a" selected>Language material</option>
+                <option value="c">Notated music</option>
+                <option value="d">Manuscript notated music</option>
+                <option value="e">Cartographic material</option>
+                <option value="f">Manuscript cartographic material</option>
+                <option value="g">Projected medium</option>
+                <option value="i">Nonmusical sound recording</option>
+                <option value="j">Musical sound recording</option>
+                <option value="k">Two-dimensional nonprojectable graphic</option>
+                <option value="m">Computer file</option>
+                <option value="o">Kit</option>
+                <option value="p">Mixed materials</option>
+                <option value="r">Three-dimensional artifact or naturally occurring object</option>
+                <option value="t">Manuscript language material</option>
+            </select>
+            <label for="bibliographic_level">Bibliographic level</label>
+            <select class="form-select" aria-label="Bibliographic level" id="bibliographic_level" v-model="bibliographic_level">
+                <option value="a">Monographic component part</option>
+                <option value="b">Serial component part</option>
+                <option value="c">Collection</option>
+                <option value="d">Subunit</option>
+                <option value="i">Integrating resource</option>
+                <option value="m" selected>Monograph/Item</option>
+                <option value="s">Serial</option>
+            </select>
+            <label for="type_of_control">Type of control</label>
+            <select class="form-select" aria-label="Type of control" id="type_of_control" v-model="type_of_control">
+                <option value="\" selected>No specified type</option>
+                <option value="a">Archival</option>
+            </select>
+            <label for="character_coding_scheme">Character coding scheme</label>
+            <select class="form-select" aria-label="Character coding scheme" id="character_coding_scheme" v-model="character_coding_scheme">
+                <option value="\">MARC-8</option>
+                <option value="a" selected>UCS/Unicode</option>
+            </select>
+            <!-- <div class="mb-3">
+                <label for="base_address_of_data" class="form-label">Base address of data (Length of Leader and Directory)</label>
+                <input v-model="base_address_of_data" type="text" class="form-control" id="base_address_of_data">
+            </div> -->
+            <label for="encoding_level">Encoding level</label>
+            <select class="form-select" aria-label="Encoding level" id="encoding_level" v-model="encoding_level">
+                <option value="\">Full level</option>
+                <option value="1">Full level, material not examined</option>
+                <option value="2">Less-than-full level, material not examined</option>
+                <option value="3">Abbreviated level</option>
+                <option value="4">Core level</option>
+                <option value="5">Partial (preliminary) level</option>
+                <option value="7">Minimal level</option>
+                <option value="8">Prepublication level</option>
+                <option value="u">Unknown</option>
+                <option value="u">Unknown</option>
+                <option value="z">Not applicable</option>
+                <option value="I" selected>Full level cataloging input by OCLC participating library</option>
+                <option value="K">Less-than-full cataloging input by OCLC participating library</option>
+                <option value="L">Non-LC and non-NLM cataloging added from tape</option>
+                <option value="M">Less-than-full cataloging added from tapeloading</option>
+            </select>
+            <label for="descriptive_cataloging_form">Descriptive cataloging form</label>
+            <select class="form-select" aria-label="Descriptive cataloging form" id="descriptive_cataloging_form" v-model="descriptive_cataloging_form">
+                <option value="\">Non-ISBD</option>
+                <option value="a" selected>AACR 2</option>
+                <option value="c">ISBD punctuation omitted</option>
+                <option value="i">ISBD punctuation included</option>
+                <option value="n">Non-ISBD punctuation omitted</option>
+                <option value="u">Unknown</option>
+            </select>
+            <label for="multipart_resource_record_level">Multipart resource record level</label>
+            <select class="form-select" aria-label="Multipart resource record level" id="multipart_resource_record_level" v-model="multipart_resource_record_level">
+                <option value="\" selected>Not specified or not applicable</option>
+                <option value="a">Set</option>
+                <option value="b">Part with independent title</option>
+                <option value="c">Part with dependent title</option>
+            </select>
+
+            <br/><br/>
+            <h2>Predefined</h2>
+            <button type="button" class="btn btn-primary" @click="bibliographic_level='m';type_of_record='a'">Book</button>
+            <button type="button" class="btn btn-info" @click="bibliographic_level='s';type_of_record='a'">Serial</button>
+            <button type="button" class="btn btn-success" @click="bibliographic_level='m';type_of_record='c'">Score Music</button>
+
+
+        </div>
+
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#editor',
+
+            data: {
+                record_status: 'n',
+                type_of_record: 'a',
+                bibliographic_level: 'm',
+                type_of_control: "\\",
+                character_coding_scheme: "a",
+                encoding_level: "I",
+                descriptive_cataloging_form: "a",
+                multipart_resource_record_level: "\\",
+                copySuccessful: false,
+                current_ldr: null,
+
+            },
+            mounted() {
+            },
+            watch: {
+                current_ldr: function (val) {
+                    this.record_status = val.substr(5,1),
+                    this.type_of_record = val.substr(6,1),
+                    this.bibliographic_level = val.substr(7,1),
+                    this.type_of_control = val.substr(8,1).replace(/\\/, "\\"),
+                    this.character_coding_scheme = val.substr(9,1).replace(/\\/, "\\"),
+                    this.encoding_level = val.substr(17,1).replace(/\\/, "\\"),
+                    this.descriptive_cataloging_form = val.substr(18,1).replace(/\\/, "\\"),
+                    this.multipart_resource_record_level = val.substr(19,1).replace(/\\/, "\\")
+                },
+            },
+            computed: {
+                record_length: function(){
+                    return this.current_ldr
+                    ? this.current_ldr.substring(0,5)
+                    : '00000'
+                },
+                base_address_of_data: function(){
+                    return this.current_ldr
+                    ? this.current_ldr.substring(12,17)
+                    : '00000'
+                },
+                copy: function(){
+                    return this.record_length + this.record_status + this.type_of_record + this.bibliographic_level + this.type_of_control + this.character_coding_scheme + '22' + this.base_address_of_data + this.encoding_level + this.descriptive_cataloging_form + this.multipart_resource_record_level + '4500'
+                }
+            },
+            methods: {
+                copyTestingCode () {
+                    let testingCodeToCopy = document.querySelector('#copy')
+                    testingCodeToCopy.setAttribute('type', 'text')
+                    testingCodeToCopy.select()
+
+                    try {
+                        var successful = document.execCommand('copy');
+                        var msg = successful ? 'successful' : 'unsuccessful';
+                        this.copySuccessful = true
+                        setTimeout(() => {   this.copySuccessful = false; }, 2000);
+                    } catch (err) {
+                        alert('Oops, unable to copy');
+                    }
+
+                    /* unselect the range */
+                    testingCodeToCopy.setAttribute('type', 'hidden')
+                    window.getSelection().removeAllRanges()
+                 },
+            }
+        })
+    </script>
+        
+  </body>
+</html>
