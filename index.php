@@ -142,9 +142,9 @@
 
 
                         <h2>Predefined</h2>
-                        <button type="button" class="btn btn-primary" @click="bibliographic_level='m';type_of_record='a'">Book</button>
-                        <button type="button" class="btn btn-info" @click="bibliographic_level='s';type_of_record='a'">Serial</button>
-                        <button type="button" class="btn btn-success" @click="bibliographic_level='m';type_of_record='c'">Score Music</button>
+                        <button type="button" class="btn btn-primary" @click="ldr.bibliographic_level='m';ldr.type_of_record='a'">Book</button>
+                        <button type="button" class="btn btn-info" @click="ldr.bibliographic_level='s';ldr.type_of_record='a'">Serial</button>
+                        <button type="button" class="btn btn-success" @click="ldr.bibliographic_level='m';ldr.type_of_record='c'">Sheet Music</button>
                     </div>
                     <div class="col-6 col-md-4">
                         <h2>MARC Record</h2>
