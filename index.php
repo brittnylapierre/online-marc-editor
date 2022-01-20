@@ -292,6 +292,29 @@
                         })
                         .finally(() => (this.loadingDOI = false));
                 },
+                getZ3950(isbn, host, hostname) {
+                    axios
+                        .get("z3950.php?isbn=" + isbn + '&host=' + host)
+                        .then((response) => {
+                        if(this.Z3950Records !== null) {
+                            Object.values(response.data).forEach(val => {
+                            val["source"] =hostname;
+                            this.Z3950Records.push(val);
+                            });
+                        } else {
+                            this.Z3950Records = Array ();
+                            Object.values(response.data).forEach(val => {
+                            val["source"] =hostname;
+                            this.Z3950Records.push(val);
+                            });
+                        }
+                        })
+                        .catch(function (error) {
+                        console.log(error);
+                        this.errored = true;
+                        })
+                        .finally(() => (this.loadingZ3950 = false));
+                },
                 update005() {
                     let today = new Date().toISOString().replace('-', '').replace('-', '').replace('T', '').replace(':', '').replace(':', '').substr(0,16);
                     this.record._005 = today
