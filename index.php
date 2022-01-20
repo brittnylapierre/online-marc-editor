@@ -136,7 +136,7 @@
                             {{ complete_record }}
                         </pre>
                         <span class="btn btn-info text-white copy-btn ml-auto" @click.stop.prevent="copyTestingCode">Copy</span>
-                        <input type="hidden" id="copy" :value="copy">
+                        <input type="hidden" id="complete_record" :value="complete_record">
 
                         <div class="alert alert-info" role="alert" v-if="copySuccessful">
                             Copied successful!
@@ -209,7 +209,7 @@
             },
             methods: {
                 copyTestingCode () {
-                    let testingCodeToCopy = document.querySelector('#copy')
+                    let testingCodeToCopy = document.querySelector('#complete_record')
                     testingCodeToCopy.setAttribute('type', 'text')
                     testingCodeToCopy.select()
 
