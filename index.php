@@ -276,7 +276,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="title">Imprint</span>
                             <div class="input-group-prepend">
-                                <select class="input-group-text form-select" id="_245_ind1" v-model="record._245_ind1">
+                                <select class="input-group-text form-select" id="_260_ind1" v-model="record._260_ind1">
                                     <option value="#">#</option>
                                 </select>
                             </div>
@@ -286,10 +286,19 @@
                                 </select>
                             </div>
                             <input type="text" id="_260a" v-model="record._260a" class="form-control" placeholder="Place of publication" aria-label="Place of publication" aria-describedby="_260a">
-                            <input type="text" id="_260b" v-model="record._260b" class="form-control" placeholder="Name of publisher" aria-label=" Name of publisher" aria-describedby="_260b">
+                            <input type="text" id="_260b" v-model="record._260b" class="form-control" placeholder="Name of publisher" aria-label="Name of publisher" aria-describedby="_260b">
                             <input type="text" id="_260c" v-model="record._260c" class="form-control" placeholder="Date of publication" aria-label="Date of publication" aria-describedby="_260c">
                         </div>
                         <!-- \260 -->
+
+                        <!-- 300 -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="_300">Physical Description</span>
+                            <input type="text" id="_300a" v-model="record._300a" class="form-control" placeholder="Extent (R)" aria-label="Extent (R)" aria-describedby="_300a">
+                            <input type="text" id="_300b" v-model="record._300b" class="form-control" placeholder="Other physical details (NR)" aria-label="Other physical details (NR)" aria-describedby="_300b">
+                            <input type="text" id="_300c" v-model="record._300c" class="form-control" placeholder="Dimensions (R)" aria-label="Dimensions (R)" aria-describedby="_300c">
+                        </div>
+                        <!-- \300 -->
 
                         <h2>Predefined</h2>
                         <button type="button" class="btn btn-primary" @click="ldr.bibliographic_level='m';ldr.type_of_record='a'">Book</button>
@@ -364,7 +373,12 @@
                     _260_ind2: "#",
                     _260a: null,
                     _260b: null,
-                    _260c: null
+                    _260c: null,
+                    _300_ind1: "#",
+                    _300_ind2: "#",
+                    _300a: null,
+                    _300b: null,
+                    _300c: null
                 },
                 copySuccessful: false,
                 current_ldr: null,
@@ -384,7 +398,8 @@
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '') +
-                    '\n=0260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '')
+                    '\n=260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
+                    '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '')
                 }
             },
             mounted() {
