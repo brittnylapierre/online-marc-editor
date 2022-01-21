@@ -244,6 +244,25 @@
                         </div>
                         <!-- \SUBTITLE -->
 
+                        <!-- 260 -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="title">Imprint</span>
+                            <div class="input-group-prepend">
+                                <select class="input-group-text form-select" id="_245_ind1" v-model="record._245_ind1">
+                                    <option value="#">#</option>
+                                </select>
+                            </div>
+                            <div class="input-group-prepend">
+                                <select class="input-group-text form-select" id="_260_ind2" v-model="record._260_ind2">
+                                    <option value="#">#</option>
+                                </select>
+                            </div>
+                            <input type="text" id="_260a" v-model="record._260a" class="form-control" placeholder="Place of publication" aria-label="Place of publication" aria-describedby="_260a">
+                            <input type="text" id="_260b" v-model="record._260b" class="form-control" placeholder="Name of publisher" aria-label=" Name of publisher" aria-describedby="_260b">
+                            <input type="text" id="_260c" v-model="record._260c" class="form-control" placeholder="Date of publication" aria-label="Date of publication" aria-describedby="_260c">
+                        </div>
+                        <!-- \260 -->
+
                         <h2>Predefined</h2>
                         <button type="button" class="btn btn-primary" @click="ldr.bibliographic_level='m';ldr.type_of_record='a'">Book</button>
                         <button type="button" class="btn btn-info" @click="ldr.bibliographic_level='s';ldr.type_of_record='a'">Serial</button>
@@ -305,7 +324,12 @@
                     _245_ind2: '0',
                     subtitle: null,
                     doi:null,
-                    isbn:null
+                    isbn:null,
+                    _260_ind1: "#",
+                    _260_ind2: "#",
+                    _260a: null,
+                    _260b: null,
+                    _260c: null
                 },
                 copySuccessful: false,
                 current_ldr: null,
@@ -323,7 +347,8 @@
                     (this.record.isbn ? '\n=020  ##$a' + this.record.isbn : '') +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
-                    (this.record.subtitle ? '$b' + this.record.subtitle : '')
+                    (this.record.subtitle ? '$b' + this.record.subtitle : '') +
+                    '\n=0260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '')
                 }
             },
             mounted() {
@@ -393,7 +418,7 @@
                 },
                 getZ3950(isbn, host, hostname) {
                     axios
-                    .get("http://34.134.73.210/api/z3950?isbn=" + isbn + '&host=' + host)
+                    .get("http://34.134.188.198/api/z3950?isbn=" + isbn + '&host=' + host)
                     .then((response) => {
                     if(this.Z3950Records !== null) {
                         Object.values(response.data).forEach(val => {
