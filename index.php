@@ -83,13 +83,8 @@
                                             <td>
                                                 <button class="btn btn-info btn-sm m-2" @click="
                                                     record.title = Z3950Record.title,
-                                                    addAuthor(Z3950Record.author),
-                                                    addAuthor(Z3950Record.editor),
-                                                    record.datePublished = Z3950Record.pub_date,
-                                                    record.copyrightYear = Z3950Record.pub_date,
-                                                    record.publisher[0].name = Z3950Record.publisher,
-                                                    record.bookEdition = Z3950Record.edition,
-                                                    record.numberOfPages = Z3950Record.extent
+                                                    record._260c = Z3950Record.pub_date,
+                                                    record._260b = Z3950Record.publisher
                                                 ">Usar</button>
                                             </td>
                                         </tr>
@@ -378,11 +373,10 @@
                         .get("https://api.crossref.org/works/" + doi)
                         .then((response) => {
                         this.crossrefRecord = response,
-                        this.record.title = this.crossrefRecord.data.message.title
+                        this.record.title = this.crossrefRecord.data.message.title,
                         // this.record.url = this.crossrefRecord.data.message.URL,
-                        // this.record.publisher[0].name = this.crossrefRecord.data.message.publisher,
-                        // this.record.copyrightYear = this.crossrefRecord.data.message.created.['date-parts'].[0].[0],
-                        // this.record.datePublished = this.crossrefRecord.data.message.issued.['date-parts'].[0].[0],
+                        this.record._260b = this.crossrefRecord.data.message.publisher,
+                        this.record._260c = this.crossrefRecord.data.message.issued['date-parts'][0][0]
                         // Object.values(this.crossrefRecord.data.message.author).forEach(val => {
                         //     this.record.author.push({ id: "", name: val.given + " " + val.family, function: "Author" });
                         // });
@@ -401,10 +395,9 @@
                         .get("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn)
                         .then((response) => {
                         this.ISBNRecord = response.data,
-                        this.record.title = this.ISBNRecord.items[0].volumeInfo.title
+                        this.record.title = this.ISBNRecord.items[0].volumeInfo.title,
                         //this.record.abstract = this.ISBNRecord.items.[0].volumeInfo.description,
-                        //this.record.datePublished = this.ISBNRecord.items.[0].volumeInfo.publishedDate,
-                        //this.record.copyrightYear = this.ISBNRecord.items.[0].volumeInfo.publishedDate,
+                        this.record._260c = this.ISBNRecord.items[0].volumeInfo.publishedDate
                         //this.record.numberOfPages = this.ISBNRecord.items.[0].volumeInfo.pageCount
                         //Object.values(this.ISBNRecord.items.[0].volumeInfo.authors).forEach(val => {
                         //    this.record.author.push({ id: "", name: val, function: "" });
