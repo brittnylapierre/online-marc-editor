@@ -28,6 +28,78 @@
 
                         <button v-on:click="ldrShow = !ldrShow" type="button" class="btn btn-primary">LDR</button>
                         <button v-on:click="doiShow = !doiShow" type="button" class="btn btn-primary">DOI</button>
+                        <button v-on:click="isbnShow = !isbnShow" type="button" class="btn btn-primary">ISBN</button>
+
+                        <!-- ISBN -->
+                        <div v-show="isbnShow" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <div class="alert alert-warning" role="alert" v-show="loadingISBN">
+                                Buscando dados no Google Books ...
+                            </div>
+                            <div class="alert alert-warning" role="alert" v-show="loadingZ3950">
+                                Buscando dados no Z39.50 ...
+                            </div>
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend"><span class="input-group-text">ISBN</span></div>
+                                <input type="text" class="form-control" v-model.trim="record.isbn" id="isbn" name="isbn" placeholder="Enter ISBN">
+                                <button class="btn btn-info btn-sm m-2" @click="getISBNGoogleBooks(record.isbn), loadingISBN = true">Google Books</button>
+                                <button class="btn btn-info btn-sm m-2" @click="
+                                    getZ3950(record.isbn, 'dedalus.usp.br:9991/usp01', 'USP/DEDALUS'),
+                                    getZ3950(record.isbn, 'unesp.alma.exlibrisgroup.com:1921/55UNESP_INST', 'UNESP'),
+                                    getZ3950(record.isbn, '162.214.168.248:9998/bib', 'BN'),
+                                    loadingZ3950 = true
+                                ">Z39.50</button>
+                            </div>
+
+                            <div class="alert alert-info alert-dismissible fade show bg-opacity-10" role="alert">
+                                <table class="table p-2 text-dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Fonte</th>
+                                            <th scope="col">Título</th>
+                                            <th scope="col">Autor</th>
+                                            <th scope="col">Outros autores</th>
+                                            <th scope="col">Editora</th>
+                                            <th scope="col">Local</th>
+                                            <th scope="col">Data de publicação</th>
+                                            <th scope="col">Descrição física</th>
+                                            <th scope="col">Idioma</th>
+                                            <th scope="col">Edição</th>
+                                            <th scope="col">Usar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(Z3950Record, indexZ3950Record) in Z3950Records" :key="indexZ3950Record">
+                                            <th scope="row">{{ Z3950Record.source }}</th>
+                                            <td>{{ Z3950Record.title }}</td>
+                                            <td>{{ Z3950Record.author }}</td>
+                                            <td>{{ Z3950Record.editor }}</td>
+                                            <td>{{ Z3950Record.publisher }}</td>
+                                            <td>{{ Z3950Record.pub_place }}</td>
+                                            <td>{{ Z3950Record.pub_date }}</td>
+                                            <td>{{ Z3950Record.extent }}</td>
+                                            <td>{{ Z3950Record.language }}</td>
+                                            <td>{{ Z3950Record.edition }}</td>
+                                            <td>
+                                                <button class="btn btn-info btn-sm m-2" @click="
+                                                    record.title = Z3950Record.title,
+                                                    addAuthor(Z3950Record.author),
+                                                    addAuthor(Z3950Record.editor),
+                                                    record.datePublished = Z3950Record.pub_date,
+                                                    record.copyrightYear = Z3950Record.pub_date,
+                                                    record.publisher[0].name = Z3950Record.publisher,
+                                                    record.bookEdition = Z3950Record.edition,
+                                                    record.numberOfPages = Z3950Record.extent
+                                                ">Usar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" class="btn-close" aria-label="Close" @click="Z3950Records = null"></button>
+                            </div>
+
+                        </div>
+                        <!-- /ISBN -->
 
                         <!-- DOI -->
                         <div v-show="doiShow" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -210,6 +282,7 @@
             data: {                
                 ldrShow: false,
                 doiShow: false,
+                isbnShow: false,
                 ldr:{
                     record_length: '00000',
                     record_status: 'n',
@@ -223,17 +296,22 @@
                     multipart_resource_record_level: "\\"
                 },
                 crossrefRecord: null,
+                ISBNRecord: null,
+                Z3950Records: null,
                 record: {
                     _005: "",
                     title: "",
                     _245_ind1: '1',
                     _245_ind2: '0',
                     subtitle: null,
-                    doi:null
+                    doi:null,
+                    isbn:null
                 },
                 copySuccessful: false,
                 current_ldr: null,
                 loadingDOI: false,
+                loadingISBN: false,
+                loadingZ3950: false
 
             },
             computed: {
@@ -242,6 +320,7 @@
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
                     this.ldr.multipart_resource_record_level + '4500' +
                     '\n=005  ' + this.record._005 +
+                    (this.record.isbn ? '\n=020  ##$a' + this.record.isbn : '') +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '')
@@ -292,28 +371,48 @@
                         })
                         .finally(() => (this.loadingDOI = false));
                 },
-                getZ3950(isbn, host, hostname) {
+                getISBNGoogleBooks(isbn) {
                     axios
-                        .get("z3950.php?isbn=" + isbn + '&host=' + host)
+                        .get("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn)
                         .then((response) => {
-                        if(this.Z3950Records !== null) {
-                            Object.values(response.data).forEach(val => {
-                            val["source"] =hostname;
-                            this.Z3950Records.push(val);
-                            });
-                        } else {
-                            this.Z3950Records = Array ();
-                            Object.values(response.data).forEach(val => {
-                            val["source"] =hostname;
-                            this.Z3950Records.push(val);
-                            });
-                        }
+                        this.ISBNRecord = response.data,
+                        this.record.title = this.ISBNRecord.items[0].volumeInfo.title
+                        //this.record.abstract = this.ISBNRecord.items.[0].volumeInfo.description,
+                        //this.record.datePublished = this.ISBNRecord.items.[0].volumeInfo.publishedDate,
+                        //this.record.copyrightYear = this.ISBNRecord.items.[0].volumeInfo.publishedDate,
+                        //this.record.numberOfPages = this.ISBNRecord.items.[0].volumeInfo.pageCount
+                        //Object.values(this.ISBNRecord.items.[0].volumeInfo.authors).forEach(val => {
+                        //    this.record.author.push({ id: "", name: val, function: "" });
+                        //});
                         })
                         .catch(function (error) {
                         console.log(error);
                         this.errored = true;
                         })
-                        .finally(() => (this.loadingZ3950 = false));
+                        .finally(() => (this.loadingISBN = false));
+                },
+                getZ3950(isbn, host, hostname) {
+                    axios
+                    .get("http://34.134.73.210/api/z3950?isbn=" + isbn + '&host=' + host)
+                    .then((response) => {
+                    if(this.Z3950Records !== null) {
+                        Object.values(response.data).forEach(val => {
+                        val["source"] =hostname;
+                        this.Z3950Records.push(val);
+                        });
+                    } else {
+                        this.Z3950Records = Array ();
+                        Object.values(response.data).forEach(val => {
+                        val["source"] =hostname;
+                        this.Z3950Records.push(val);
+                        });
+                    }
+                    })
+                    .catch(function (error) {
+                    console.log(error);
+                    this.errored = true;
+                    })
+                    .finally(() => (this.loadingZ3950 = false));
                 },
                 update005() {
                     let today = new Date().toISOString().replace('-', '').replace('-', '').replace('T', '').replace(':', '').replace(':', '').substr(0,16);
