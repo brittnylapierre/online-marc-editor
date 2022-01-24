@@ -2021,7 +2021,8 @@
                         this.record.title = this.crossrefRecord.data.message.title,
                         // this.record.url = this.crossrefRecord.data.message.URL,
                         this.record._260b = this.crossrefRecord.data.message.publisher,
-                        this.record._260c = this.crossrefRecord.data.message.issued['date-parts'][0][0]
+                        this.record._260c = this.crossrefRecord.data.message.issued['date-parts'][0][0],
+                        this.f008.p07_10 = this.crossrefRecord.data.message.issued['date-parts'][0][0]
                         // Object.values(this.crossrefRecord.data.message.author).forEach(val => {
                         //     this.record.author.push({ id: "", name: val.given + " " + val.family, function: "Author" });
                         // });
@@ -2042,7 +2043,8 @@
                         this.ISBNRecord = response.data,
                         this.record.title = this.ISBNRecord.items[0].volumeInfo.title,
                         //this.record.abstract = this.ISBNRecord.items.[0].volumeInfo.description,
-                        this.record._260c = this.ISBNRecord.items[0].volumeInfo.publishedDate
+                        this.record._260c = this.ISBNRecord.items[0].volumeInfo.publishedDate,
+                        this.f008.p07_10 = this.ISBNRecord.items[0].volumeInfo.publishedDate
                         //this.record.numberOfPages = this.ISBNRecord.items.[0].volumeInfo.pageCount
                         //Object.values(this.ISBNRecord.items.[0].volumeInfo.authors).forEach(val => {
                         //    this.record.author.push({ id: "", name: val, function: "" });
