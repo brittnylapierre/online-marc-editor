@@ -32,11 +32,12 @@
 
                 <div class="row">
 
-                    <div class="col-md-8 p-5 pt-2" >
-                    <h2>Predefined</h2>
-                    <button type="button" class="btn btn-primary" @click="recordType='Book';ldr.bibliographic_level='m';ldr.type_of_record='a';f008.p19='#';f008.p21='#';f008.p33='0';f008.p34='#'">Book</button>
-                    <button type="button" class="btn btn-info" @click="recordType='Serial';ldr.bibliographic_level='s';ldr.type_of_record='a';f008.p19='r';f008.p21='p';f008.p33='#';f008.p34='0'">Serial</button>
-                    <!-- <button type="button" class="btn btn-success" @click="recordType='Musical Score';ldr.bibliographic_level='m';ldr.type_of_record='c'">Musical Score</button> -->
+                    <div class="col-md-8" >
+                        <h5>Predefined: 
+                        <button type="button" class="btn btn-primary" @click="recordType='Book';ldr.bibliographic_level='m';ldr.type_of_record='a';f008.p19='#';f008.p21='#';f008.p33='0';f008.p34='#'">Book</button>
+                        <button type="button" class="btn btn-info" @click="recordType='Serial';ldr.bibliographic_level='s';ldr.type_of_record='a';f008.p19='r';f008.p21='p';f008.p33='#';f008.p34='0'">Serial</button>
+                        <!-- <button type="button" class="btn btn-success" @click="recordType='Musical Score';ldr.bibliographic_level='m';ldr.type_of_record='c'">Musical Score</button> -->
+</h5>
                     </div>
 
                     <div class="col-md-8 p-5 pt-2" >
@@ -1854,6 +1855,13 @@
                         </div>
                         <!-- \300 -->
 
+                        <!-- 310 -->
+                        <div class="input-group mb-3" v-if="recordType === 'Serial'">
+                            <span class="input-group-text" id="_310">Current Publication Frequency</span>
+                            <input type="text" id="_310a" v-model="record._310a" class="form-control" placeholder="Current publication frequency" aria-label="Current publication frequency" aria-describedby="_310a">
+                        </div>
+                        <!-- \310 -->
+
                     </div>
                     <div class="col-6 col-md-4">
                         <h2>MARC Record</h2>
@@ -1959,7 +1967,8 @@
                     _300_ind2: "#",
                     _300a: null,
                     _300b: null,
-                    _300c: null
+                    _300c: null,
+                    _310a: null
                 },
                 copySuccessful: false,
                 current_ldr: null,
@@ -1988,7 +1997,8 @@
                     '\n=260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + 
                     (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
                     '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
-                    (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '')
+                    (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
+                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '')
                 }
             },
             mounted() {
