@@ -500,6 +500,29 @@
 
 
                         <br/><br/>
+
+                        <!-- 001 -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="_001">Control Number</span>
+                            <input type="text" id="_001" v-model="record._001" class="form-control" placeholder="Control Number" aria-label="Control Number" aria-describedby="_001">
+                        </div>
+                        <!-- \001 -->
+
+                        <!-- 003 -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="_003">Control Number Identifier</span>
+                            <input type="text" id="_003" v-model="record._003" class="form-control" placeholder="Control Number Identifier" aria-label="Control Number Identifier" aria-describedby="_003">
+                        </div>
+                        <!-- \003 -->
+
+                        <!-- 040 -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="_040">Cataloging Source</span>
+                            <input type="text" id="_040a" v-model="record._040a" class="form-control" placeholder="Original cataloging agency" aria-label="Original cataloging agency" aria-describedby="_040a">
+                            <input type="text" id="_040c" v-model="record._040c" class="form-control" placeholder="Transcribing agency" aria-label="Transcribing agency" aria-describedby="_040c">
+                        </div>
+                        <!-- \040 -->
+
                         <!-- TITLE -->
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="title">Title</span>
@@ -643,7 +666,11 @@
                 ISBNRecord: null,
                 Z3950Records: null,
                 record: {
+                    _001: "",
+                    _003: "",
                     _005: "",
+                    _040a: "",
+                    _040c: "",
                     title: "",
                     _245_ind1: '1',
                     _245_ind2: '0',
@@ -673,12 +700,15 @@
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
                     this.ldr.multipart_resource_record_level + '4500' +
+                    '\n=001  ' + this.record._001 +
+                    '\n=003  ' + this.record._003 +
                     '\n=005  ' + this.record._005 +
                     '\n=008  ' + this.f008.p00_05 + this.f008.p06 + this.f008.p07_10 + this.f008.p11_14 + this.f008.p15_17 + this.f008.p18_21 + this.f008.p22 + this.f008.p23 +
                     this.f008.p24 + this.f008.p25 + this.f008.p26 + this.f008.p27 + this.f008.p28 + this.f008.p29 + this.f008.p30 + this.f008.p31 + this.f008.p32 +
                     this.f008.p33 + this.f008.p34 +
                     (this.record.isbn ? '\n=020  ##$a' + this.record.isbn : '') +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
+                    '\n=040  ##' + '$a' + this.record._040a + '$c' + this.record._040c +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '') +
                     '\n=260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + 
