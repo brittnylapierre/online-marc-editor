@@ -1230,7 +1230,27 @@
                                 <option value="zun">Zuni</option>
                                 <option value="zxx">No linguistic content</option>
                                 <option value="zza">Zaza</option>                                
-                            </select>                            
+                            </select>
+ 
+                            <label for="p38">38 - Modified record</label>
+                            <select class="form-select" aria-label="Modified record" id="p38" v-model="f008.p38">
+                                <option value="#">Not modified</option>
+                                <option value="d">Dashed-on information omitted</option>
+                                <option value="o">Completely romanized/printed cards romanized</option>
+                                <option value="r">Completely romanized/printed cards in script</option>
+                                <option value="s">Shortened</option>
+                                <option value="x">Missing characters</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p39">39 - Cataloging source</label>
+                            <select class="form-select" aria-label="Cataloging source" id="p39" v-model="f008.p39">
+                                <option value="#">National bibliographic agency</option>
+                                <option value="c">Cooperative cataloging program</option>
+                                <option value="d">Other</option>
+                                <option value="u">Unknown</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
 
                         </div>
                         <!-- /008 -->
@@ -1572,7 +1592,9 @@
                     p32: '#',
                     p33: '0',
                     p34: '#',
-                    p35_37: 'por'
+                    p35_37: 'por',
+                    p38: '#',
+                    p39: 'd'
                 },
                 crossrefRecord: null,
                 ISBNRecord: null,
@@ -1617,7 +1639,7 @@
                     '\n=005  ' + this.record._005 +
                     '\n=008  ' + this.f008.p00_05 + this.f008.p06 + this.f008.p07_10 + this.f008.p11_14 + this.f008.p15_17 + this.f008.p18_21 + this.f008.p22 + this.f008.p23 +
                     this.f008.p24 + this.f008.p25 + this.f008.p26 + this.f008.p27 + this.f008.p28 + this.f008.p29 + this.f008.p30 + this.f008.p31 + this.f008.p32 +
-                    this.f008.p33 + this.f008.p34 +  this.f008.p35_37 +
+                    this.f008.p33 + this.f008.p34 +  this.f008.p35_37 + this.f008.p38 + this.f008.p39 +
                     (this.record.isbn ? '\n=020  ##$a' + this.record.isbn : '') +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=040  ##' + '$a' + this.record._040a + '$c' + this.record._040c +
