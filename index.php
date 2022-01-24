@@ -1794,6 +1794,32 @@
                         </div>
                         <!-- \040 -->
 
+      <!-- 100 -->
+      <template>
+        <div class="input-group mb-2" v-for="(author, indexAuthor) in record.personal_name">
+
+            <span class="input-group-text" id="title">Personal Name</span>
+            <div class="input-group-prepend">
+                <select class="input-group-text form-select" id="_100_ind1" v-model="record.personal_name[indexAuthor].ind1">
+                    <option selected>Type of personal name entry element</option>
+                    <option value="0">0 - Forename</option>
+                    <option value="1">1 - Surname</option>
+                    <option value="3">3 - Family name</option>
+                </select>
+            </div>
+            <input type="text" id="_100a" v-model="record.personal_name[indexAuthor].a" class="form-control" placeholder="Personal name" aria-label="Personal name" aria-describedby="_100a">
+            <input type="text" id="_100d" v-model="record.personal_name[indexAuthor].d" class="form-control" placeholder="Dates associated with a name" aria-label="Dates associated with a name" aria-describedby="_100d">
+            <input type="text" id="_100q" v-model="record.personal_name[indexAuthor].q" class="form-control" placeholder="Fuller form of name" aria-label="Fuller form of name" aria-describedby="_100q">
+            <button @click="deleteField('personal_name', indexAuthor)" class="btn btn-danger btn-sm">Delete</button>
+        </div>
+
+        <button @click="addField('personal_name')" class="btn btn-info btn-sm mb-2">
+          Add Personal Name
+        </button>
+      </template>
+      <!-- \100 -->
+
+
                         <!-- TITLE -->
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="title">Title</span>
@@ -1953,6 +1979,8 @@
                     _040a: "",
                     _040c: "",
                     title: "",
+                    personal_name: [],
+                    personal_names_array: [],
                     _245_ind1: '1',
                     _245_ind2: '0',
                     subtitle: null,
@@ -1974,11 +2002,19 @@
                 current_ldr: null,
                 loadingDOI: false,
                 loadingISBN: false,
-                loadingZ3950: false
+                loadingZ3950: false,
+                i_personal_name: 1
 
             },
             computed: {
                 complete_record: function(){
+
+                    this.record.personal_names_array = [];
+                    for (this.i_personal_name = 1; this.i_personal_name < this.record.personal_name.length; this.i_personal_name++) {
+                        this.record.personal_names_array.push('\n=700  ' + this.record.personal_name[this.i_personal_name].ind1 + '#$a' + this.record.personal_name[this.i_personal_name].a + (this.record.personal_name[this.i_personal_name].d ? '$d' + this.record.personal_name[this.i_personal_name].d : '') + (this.record.personal_name[this.i_personal_name].q ? '$q' + this.record.personal_name[this.i_personal_name].q : ''));
+                    }                    
+                    this.i_personal_name = 1;            
+
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
                     this.ldr.multipart_resource_record_level + '4500' +
@@ -1991,20 +2027,29 @@
                     this.f008.p33 + this.f008.p34 +  this.f008.p35_37 + this.f008.p38 + this.f008.p39 +
                     (this.record.isbn ? '\n=020  ##$a' + this.record.isbn : '') +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
-                    '\n=040  ##' + '$a' + this.record._040a + '$c' + this.record._040c +
+                    '\n=040  ##$a' + this.record._040a + '$c' + this.record._040c +
+                    (this.record.personal_name[0] ? '\n=100  ' + this.record.personal_name[0].ind1 + '#$a' + this.record.personal_name[0].a + (this.record.personal_name[0].d ? '$d' + this.record.personal_name[0].d : '') + (this.record.personal_name[0].q ? '$q' + this.record.personal_name[0].q : '') : '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '') +
                     '\n=260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + 
                     (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
                     '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
                     (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
-                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '')
+                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') + this.record.personal_names_array.join("")
+
+
                 }
             },
             mounted() {
                 this.update005()
             },
             methods: {
+                addField: function (field) {
+                    if (this.record[field] === null) {
+                        this.record[field] = [];
+                    }
+                    this.record[field].push({ ind1: "1", a: "", d: null, q: null });
+                },
                 copyTestingCode () {
                     let testingCodeToCopy = document.querySelector('#complete_record')
                     testingCodeToCopy.setAttribute('type', 'text')
@@ -2022,6 +2067,9 @@
                     /* unselect the range */
                     testingCodeToCopy.setAttribute('type', 'hidden')
                     window.getSelection().removeAllRanges()
+                },
+                deleteField: function (field, index) {
+                    this.record[field].splice(index, 1);
                 },
                 getDOI(doi) {
                     axios
