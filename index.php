@@ -1801,7 +1801,7 @@
             <span class="input-group-text" id="title">Personal Name</span>
             <div class="input-group-prepend">
                 <select class="input-group-text form-select" id="_100_ind1" v-model="record.personal_name[indexAuthor].ind1">
-                    <option selected>Type of personal name entry element</option>
+                    <option disabled>Type of personal name entry element</option>
                     <option value="0">0 - Forename</option>
                     <option value="1">1 - Surname</option>
                     <option value="3">3 - Family name</option>
