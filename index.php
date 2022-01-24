@@ -34,8 +34,8 @@
 
                     <div class="col-md-8 p-5 pt-2" >
                     <h2>Predefined</h2>
-                    <button type="button" class="btn btn-primary" @click="recordType='Book';ldr.bibliographic_level='m';ldr.type_of_record='a';f008.p19='#';f008.p21='#'">Book</button>
-                    <button type="button" class="btn btn-info" @click="recordType='Serial';ldr.bibliographic_level='s';ldr.type_of_record='a';f008.p19='r';f008.p21='p'">Serial</button>
+                    <button type="button" class="btn btn-primary" @click="recordType='Book';ldr.bibliographic_level='m';ldr.type_of_record='a';f008.p19='#';f008.p21='#';f008.p33='0';f008.p34='#'">Book</button>
+                    <button type="button" class="btn btn-info" @click="recordType='Serial';ldr.bibliographic_level='s';ldr.type_of_record='a';f008.p19='r';f008.p21='p';f008.p33='#';f008.p34='0'">Serial</button>
                     <!-- <button type="button" class="btn btn-success" @click="recordType='Musical Score';ldr.bibliographic_level='m';ldr.type_of_record='c'">Musical Score</button> -->
                     </div>
 
@@ -676,7 +676,7 @@
                                     <option value="|">| - No attempt to code</option>
                                 </select>
 
-                                <label for="p27">26 - Nature of contents (006/07-10)</label>
+                                <label for="p27">27 - Nature of contents (006/07-10)</label>
                                 <select class="form-select" aria-label="Nature of contents" id="p27" v-model="f008.p27">
                                     <option value="#"># - No specified nature of contents</option>
                                     <option value="a">a - Abstracts/summaries</option>
@@ -855,6 +855,190 @@
                                     <option value="s">s - Electronic</option>
                                     <option value="|">| - No attempt to code</option>
                                 </select>
+
+                                <label for="p24">24 - Nature of entire work (006/07)</label>
+                                <select class="form-select" aria-label="Nature of entire work" id="p24" v-model="f008.p24">
+                                    <option value="#"># - No specified nature of contents</option>
+                                    <option value="a">a - Abstracts/summaries</option>
+                                    <option value="b">b - Bibliographies</option>
+                                    <option value="c">c - Catalogs</option>
+                                    <option value="d">d - Dictionaries</option>
+                                    <option value="e">e - Encyclopedias</option>
+                                    <option value="f">f - Handbooks</option>
+                                    <option value="g">g - Legal articles</option>
+                                    <option value="h">h - Biography</option>
+                                    <option value="i">i - Indexes</option>
+                                    <option value="j">j - Patent document</option>
+                                    <option value="k">k - Discographies</option>
+                                    <option value="l">l - Legislation</option>
+                                    <option value="m">m - Theses</option>
+                                    <option value="n">n - Surveys of literature in a subject area</option>
+                                    <option value="o">o - Reviews</option>
+                                    <option value="p">p - Programmed texts</option>
+                                    <option value="q">q - Filmographies</option>
+                                    <option value="r">r - Directories</option>
+                                    <option value="s">s - Statistics</option>
+                                    <option value="t">t - Technical reports</option>
+                                    <option value="u">u - Standards/specifications</option>
+                                    <option value="v">v - Legal cases and case notes</option>
+                                    <option value="w">w - Law reports and digests</option>
+                                    <option value="y">y - Yearbooks</option>
+                                    <option value="z">z - Treaties</option>
+                                    <option value="5">5 - Calendars</option>
+                                    <option value="6">6 - Comics/graphic novels</option>
+                                    <option value="|">| - No attempt to code</option>
+                                </select>
+
+                                <label for="p25">25 - Nature of contents (006/07-10)</label>
+                                <select class="form-select" aria-label="Nature of contents" id="p25" v-model="f008.p25">
+                                <option value="#"># - No specified nature of contents</option>
+                                    <option value="a">a - Abstracts/summaries</option>
+                                    <option value="b">b - Bibliographies</option>
+                                    <option value="c">c - Catalogs</option>
+                                    <option value="d">d - Dictionaries</option>
+                                    <option value="e">e - Encyclopedias</option>
+                                    <option value="f">f - Handbooks</option>
+                                    <option value="g">g - Legal articles</option>
+                                    <option value="h">h - Biography</option>
+                                    <option value="i">i - Indexes</option>
+                                    <option value="j">j - Patent document</option>
+                                    <option value="k">k - Discographies</option>
+                                    <option value="l">l - Legislation</option>
+                                    <option value="m">m - Theses</option>
+                                    <option value="n">n - Surveys of literature in a subject area</option>
+                                    <option value="o">o - Reviews</option>
+                                    <option value="p">p - Programmed texts</option>
+                                    <option value="q">q - Filmographies</option>
+                                    <option value="r">r - Directories</option>
+                                    <option value="s">s - Statistics</option>
+                                    <option value="t">t - Technical reports</option>
+                                    <option value="u">u - Standards/specifications</option>
+                                    <option value="v">v - Legal cases and case notes</option>
+                                    <option value="w">w - Law reports and digests</option>
+                                    <option value="y">y - Yearbooks</option>
+                                    <option value="z">z - Treaties</option>
+                                    <option value="5">5 - Calendars</option>
+                                    <option value="6">6 - Comics/graphic novels</option>
+                                    <option value="|||">||| - No attempt to code</option>
+                                </select>
+
+                                <label for="p26">26 - Nature of contents (006/07-10)</label>
+                                <select class="form-select" aria-label="Nature of contents" id="p26" v-model="f008.p26">
+                                <option value="#"># - No specified nature of contents</option>
+                                    <option value="a">a - Abstracts/summaries</option>
+                                    <option value="b">b - Bibliographies</option>
+                                    <option value="c">c - Catalogs</option>
+                                    <option value="d">d - Dictionaries</option>
+                                    <option value="e">e - Encyclopedias</option>
+                                    <option value="f">f - Handbooks</option>
+                                    <option value="g">g - Legal articles</option>
+                                    <option value="h">h - Biography</option>
+                                    <option value="i">i - Indexes</option>
+                                    <option value="j">j - Patent document</option>
+                                    <option value="k">k - Discographies</option>
+                                    <option value="l">l - Legislation</option>
+                                    <option value="m">m - Theses</option>
+                                    <option value="n">n - Surveys of literature in a subject area</option>
+                                    <option value="o">o - Reviews</option>
+                                    <option value="p">p - Programmed texts</option>
+                                    <option value="q">q - Filmographies</option>
+                                    <option value="r">r - Directories</option>
+                                    <option value="s">s - Statistics</option>
+                                    <option value="t">t - Technical reports</option>
+                                    <option value="u">u - Standards/specifications</option>
+                                    <option value="v">v - Legal cases and case notes</option>
+                                    <option value="w">w - Law reports and digests</option>
+                                    <option value="y">y - Yearbooks</option>
+                                    <option value="z">z - Treaties</option>
+                                    <option value="5">5 - Calendars</option>
+                                    <option value="6">6 - Comics/graphic novels</option>
+                                    <option value="|||">||| - No attempt to code</option>
+                                </select>
+
+                                <label for="p27">27 - Nature of contents (006/07-10)</label>
+                                <select class="form-select" aria-label="Nature of contents" id="p27" v-model="f008.p27">
+                                <option value="#"># - No specified nature of contents</option>
+                                    <option value="a">a - Abstracts/summaries</option>
+                                    <option value="b">b - Bibliographies</option>
+                                    <option value="c">c - Catalogs</option>
+                                    <option value="d">d - Dictionaries</option>
+                                    <option value="e">e - Encyclopedias</option>
+                                    <option value="f">f - Handbooks</option>
+                                    <option value="g">g - Legal articles</option>
+                                    <option value="h">h - Biography</option>
+                                    <option value="i">i - Indexes</option>
+                                    <option value="j">j - Patent document</option>
+                                    <option value="k">k - Discographies</option>
+                                    <option value="l">l - Legislation</option>
+                                    <option value="m">m - Theses</option>
+                                    <option value="n">n - Surveys of literature in a subject area</option>
+                                    <option value="o">o - Reviews</option>
+                                    <option value="p">p - Programmed texts</option>
+                                    <option value="q">q - Filmographies</option>
+                                    <option value="r">r - Directories</option>
+                                    <option value="s">s - Statistics</option>
+                                    <option value="t">t - Technical reports</option>
+                                    <option value="u">u - Standards/specifications</option>
+                                    <option value="v">v - Legal cases and case notes</option>
+                                    <option value="w">w - Law reports and digests</option>
+                                    <option value="y">y - Yearbooks</option>
+                                    <option value="z">z - Treaties</option>
+                                    <option value="5">5 - Calendars</option>
+                                    <option value="6">6 - Comics/graphic novels</option>
+                                    <option value="|||">||| - No attempt to code</option>
+                                </select>
+
+                                <label for="p28">28 - Government publication (006/11)</label>
+                                <select class="form-select" aria-label="Government publication" id="p28" v-model="f008.p28">
+                                    <option value="#"># - Not a government publication</option>
+                                    <option value="a">a - Autonomous or semi-autonomous component</option>
+                                    <option value="c">c - Multilocal</option>
+                                    <option value="f">f - Federal/national</option>
+                                    <option value="i">i - International intergovernmental</option>
+                                    <option value="l">l - Local</option>
+                                    <option value="m">m - Multistate</option>
+                                    <option value="o">o - Government publication-level undetermined</option>
+                                    <option value="s">s - State, provincial, territorial, dependent, etc.</option>
+                                    <option value="u">u - Unknown if item is government publication</option>
+                                    <option value="z">z - Other</option>
+                                    <option value="|">| - No attempt to code</option>
+                                </select>
+
+                                <label for="p29">29 - Conference publication (006/12)</label>
+                                <select class="form-select" aria-label="Conference publication" id="p29" v-model="f008.p29">
+                                    <option value="0">0 - Not a conference publication</option>
+                                    <option value="1">1 - Conference publication</option>
+                                    <option value="|">| - No attempt to code</option>
+                                </select>
+
+                                <label for="p33">33 - Original alphabet or script of title (006/16)</label>
+                                <select class="form-select" aria-label="Original alphabet or script of title" id="p33" v-model="f008.p33">
+                                    <option value="#"># - No alphabet or script given/No key title</option>
+                                    <option value="a">a - Basic Roman</option>
+                                    <option value="b">b - Extended Roman</option>
+                                    <option value="c">c - Cyrillic</option>
+                                    <option value="d">d - Japanese</option>
+                                    <option value="e">e - Chinese</option>
+                                    <option value="f">f - Arabic</option>
+                                    <option value="g">g - Greek</option>
+                                    <option value="h">h - Hebrew</option>
+                                    <option value="i">i - Thai</option>
+                                    <option value="j">j - Devanagari</option>
+                                    <option value="k">k - Korean</option>
+                                    <option value="l">l - Tamil</option>
+                                    <option value="u">u - Unknown</option>
+                                    <option value="z">z - Other</option>
+                                    <option value="|">| - No attempt to code </option>
+                                </select>
+
+                                <label for="p34">34 - Entry convention (006/17)</label>
+                                <select class="form-select" aria-label="Entry convention" id="p34" v-model="f008.p34">
+                                    <option value="0">0 - Successive entry</option>
+                                    <option value="1">1 - Latest entry</option>
+                                    <option value="2">2 - Integrated entry</option>
+                                    <option value="|">| - No attempt to code </option>
+                                </select>
+
 
                             </template>
 
