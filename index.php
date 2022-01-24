@@ -1825,14 +1825,14 @@
                             <span class="input-group-text" id="title">Title</span>
                             <div class="input-group-prepend">
                                 <select class="input-group-text form-select" id="_245_ind1" v-model="record._245_ind1">
-                                    <option selected>Title added entry</option>
+                                    <option disabled>Title added entry</option>
                                     <option value="0">No added entry</option>
                                     <option value="1">Added entry</option>
                                 </select>
                             </div>
                             <div class="input-group-prepend">
                                 <select class="input-group-text form-select" id="_245_ind2" v-model="record._245_ind2">
-                                    <option selected>Nonfiling characters</option>
+                                    <option disabled>Nonfiling characters</option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
