@@ -34,8 +34,8 @@
 
                     <div class="col-md-8 p-5 pt-2" >
                     <h2>Predefined</h2>
-                    <button type="button" class="btn btn-primary" @click="recordType='Book';ldr.bibliographic_level='m';ldr.type_of_record='a';f008.p19='#'">Book</button>
-                    <button type="button" class="btn btn-info" @click="recordType='Serial';ldr.bibliographic_level='s';ldr.type_of_record='a';f008.p19='r'">Serial</button>
+                    <button type="button" class="btn btn-primary" @click="recordType='Book';ldr.bibliographic_level='m';ldr.type_of_record='a';f008.p19='#';f008.p21='#'">Book</button>
+                    <button type="button" class="btn btn-info" @click="recordType='Serial';ldr.bibliographic_level='s';ldr.type_of_record='a';f008.p19='r';f008.p21='p'">Serial</button>
                     <!-- <button type="button" class="btn btn-success" @click="recordType='Musical Score';ldr.bibliographic_level='m';ldr.type_of_record='c'">Musical Score</button> -->
                     </div>
 
@@ -806,6 +806,54 @@
                                     <option value="u">u - Unknown</option>
                                     <option value="x">x - Completely irregular</option>
                                     <option value="|">| - No attempt to code </option>
+                                </select>
+
+                                <label for="p21">21 - Type of continuing resource (006/04)</label>
+                                <select class="form-select" aria-label="Type of continuing resource" id="p21" v-model="f008.p21">
+                                    <option value="#"># - None of the following</option>
+                                    <option value="d">d - Updating database</option>
+                                    <option value="g">g - Magazine</option>
+                                    <option value="h">h - Blog</option>
+                                    <option value="j">j - Journal</option>
+                                    <option value="l">l - Updating loose-leaf</option>
+                                    <option value="m">m - Monographic series</option>
+                                    <option value="n">n - Newspaper</option>
+                                    <option value="p">p - Periodical</option>
+                                    <option value="r">r - Repository</option>
+                                    <option value="s">s - Newsletter</option>
+                                    <option value="t">t - Directory</option>
+                                    <option value="w">w - Updating Web site</option>
+                                    <option value="|">| - No attempt to code </option>
+                                </select>
+
+                                <label for="p22">22 - Form of original item (006/05)</label>
+                                <select class="form-select" aria-label="Form of original item" id="p22" v-model="f008.p22">
+                                    <option value="#"># - None of the following</option>
+                                    <option value="a">a - Microfilm</option>
+                                    <option value="b">b - Microfiche</option>
+                                    <option value="c">c - Microopaque</option>
+                                    <option value="d">d - Large print</option>
+                                    <option value="e">e - Newspaper format</option>
+                                    <option value="f">f - Braille</option>
+                                    <option value="o">o - Online</option>
+                                    <option value="q">q - Direct electronic</option>
+                                    <option value="s">s - Electronic</option>
+                                    <option value="|">| - No attempt to code</option>
+                                </select>
+
+                                <label for="p23">23 - Form of item (006/06)</label>
+                                <select class="form-select" aria-label="Form of item" id="p23" v-model="f008.p23">
+                                    <option value="#"># - None of the following</option>
+                                    <option value="a">a - Microfilm</option>
+                                    <option value="b">b - Microfiche</option>
+                                    <option value="c">c - Microopaque</option>
+                                    <option value="d">d - Large print</option>                                    
+                                    <option value="f">f - Braille</option>
+                                    <option value="o">o - Online</option>
+                                    <option value="q">q - Direct electronic</option>
+                                    <option value="r">r - Regular print reproduction</option>
+                                    <option value="s">s - Electronic</option>
+                                    <option value="|">| - No attempt to code</option>
                                 </select>
 
                             </template>
@@ -1686,7 +1734,7 @@
                     p20: '#',
                     p21: '#',
                     p22: '#',
-                    p23: 'r',
+                    p23: '#',
                     p24: '#',
                     p25: '#',
                     p26: '#',
