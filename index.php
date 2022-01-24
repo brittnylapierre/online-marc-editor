@@ -12,6 +12,14 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+
+
+
+
     <title>Online MARC Editor</title>
   </head>
   <body>
@@ -54,11 +62,264 @@
                             </select>
 
                             <label for="008_07_10">07-10 - Date 1</label>
-                            <input type="text" id="008_07_10" v-model="f008.p07_10" class="form-control" aria-label="008_07_10" aria-describedby="008_07_10">
+                            <input type="text" id="008_07_10" v-model="f008.p07_10" class="form-control" aria-label="008_07_10" aria-describedby="008_07_10" maxlength="4">
 
                             <label for="008_11_14">11-14 - Date 2</label>
-                            <input type="text" id="008_11_14" v-model="f008.p11_14" class="form-control" aria-label="008_11_14" aria-describedby="008_11_14">
+                            <input type="text" id="008_11_14" v-model="f008.p11_14" class="form-control" aria-label="008_11_14" aria-describedby="008_11_14" maxlength="4">
 
+                            <label for="008_15_17">15-17 - Place of publication, production, or execution</label>
+                            <select class="form-select selectpicker" aria-label="Place of publication" id="008_15_17" v-model="f008.p15_17" data-live-search="true">
+                                <option value="xx#">No place, unknown, or undetermined</option>
+                                <option value="vp#">Various places</option>
+                                <option value="bl#">Brazil</option>
+                                <option value="fr#">France</option>
+                            </select>
+                            <br/>
+                            <label for="p18_21">18-21 - Illustrations (006/01-04)</label>
+                            <select class="form-select" aria-label="Illustrations" id="p18_21" v-model="f008.p18_21">
+                                <option value="#">No illustrations</option>
+                                <option value="a">Illustrations</option>
+                                <option value="b">Maps</option>
+                                <option value="c">Portraits</option>
+                                <option value="d">Charts</option>
+                                <option value="e">Plans</option>
+                                <option value="f">Plates</option>
+                                <option value="g">Music</option>
+                                <option value="h">Facsimiles</option>
+                                <option value="i">Coats of arms</option>
+                                <option value="j">Genealogical tables</option>
+                                <option value="k">Forms</option>
+                                <option value="l">Samples</option>
+                                <option value="m">Phonodisc, phonowire, etc.</option>
+                                <option value="o">Photographs</option>
+                                <option value="p">Illuminations</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p22">22 - Target audience (006/05)</label>
+                            <select class="form-select" aria-label="Target audience" id="p22" v-model="f008.p22">
+                                <option value="#">Unknown or not specified</option>
+                                <option value="a">Preschool</option>
+                                <option value="b">Primary</option>
+                                <option value="c">Pre-adolescent</option>
+                                <option value="d">Adolescent</option>
+                                <option value="e">Adult</option>
+                                <option value="f">Specialized</option>
+                                <option value="g">General</option>
+                                <option value="j">Juvenile</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p23">23 - Form of item (006/06)</label>
+                            <select class="form-select" aria-label="Form of item" id="p23" v-model="f008.p23">
+                                <option value="#">None of the following</option>
+                                <option value="a">Microfilm</option>
+                                <option value="b">Microfiche</option>
+                                <option value="c">Microopaque</option>
+                                <option value="d">Large print</option>
+                                <option value="f">Braille</option>
+                                <option value="o">Online</option>
+                                <option value="q">Direct electronic</option>
+                                <option value="r">Regular print reproduction</option>
+                                <option value="s">Electronic</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p24">24-27 - Nature of contents (006/07-10)</label>
+                            <select class="form-select" aria-label="Nature of contents" id="p24" v-model="f008.p24">
+                                <option value="#">No specified nature of contents</option>
+                                <option value="a">Abstracts/summaries</option>
+                                <option value="b">Bibliographies</option>
+                                <option value="c">Catalogs</option>
+                                <option value="d">Dictionaries</option>
+                                <option value="e">Encyclopedias</option>
+                                <option value="f">Handbooks</option>
+                                <option value="g">Legal articles</option>
+                                <option value="i">Indexes</option>
+                                <option value="j">Patent document</option>
+                                <option value="k">Discographies</option>
+                                <option value="l">Legislation</option>
+                                <option value="m">Theses</option>
+                                <option value="n">Surveys of literature in a subject area</option>
+                                <option value="o">Reviews</option>
+                                <option value="p">Programmed texts</option>
+                                <option value="q">Filmographies</option>
+                                <option value="r">Directories</option>
+                                <option value="s">Statistics</option>
+                                <option value="t">Technical reports</option>
+                                <option value="u">Standards/specifications</option>
+                                <option value="v">Legal cases and case notes</option>
+                                <option value="w">Law reports and digests</option>
+                                <option value="y">Yearbooks</option>
+                                <option value="z">Treaties</option>
+                                <option value="2">Offprints</option>
+                                <option value="5">Calendars</option>
+                                <option value="6">Comics/graphic novels</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p25">24-27 - Nature of contents (006/07-10)</label>
+                            <select class="form-select" aria-label="Nature of contents" id="p25" v-model="f008.p25">
+                                <option value="#">No specified nature of contents</option>
+                                <option value="a">Abstracts/summaries</option>
+                                <option value="b">Bibliographies</option>
+                                <option value="c">Catalogs</option>
+                                <option value="d">Dictionaries</option>
+                                <option value="e">Encyclopedias</option>
+                                <option value="f">Handbooks</option>
+                                <option value="g">Legal articles</option>
+                                <option value="i">Indexes</option>
+                                <option value="j">Patent document</option>
+                                <option value="k">Discographies</option>
+                                <option value="l">Legislation</option>
+                                <option value="m">Theses</option>
+                                <option value="n">Surveys of literature in a subject area</option>
+                                <option value="o">Reviews</option>
+                                <option value="p">Programmed texts</option>
+                                <option value="q">Filmographies</option>
+                                <option value="r">Directories</option>
+                                <option value="s">Statistics</option>
+                                <option value="t">Technical reports</option>
+                                <option value="u">Standards/specifications</option>
+                                <option value="v">Legal cases and case notes</option>
+                                <option value="w">Law reports and digests</option>
+                                <option value="y">Yearbooks</option>
+                                <option value="z">Treaties</option>
+                                <option value="2">Offprints</option>
+                                <option value="5">Calendars</option>
+                                <option value="6">Comics/graphic novels</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+                    
+                            <label for="p26">24-27 - Nature of contents (006/07-10)</label>
+                            <select class="form-select" aria-label="Nature of contents" id="p26" v-model="f008.p26">
+                                <option value="#">No specified nature of contents</option>
+                                <option value="a">Abstracts/summaries</option>
+                                <option value="b">Bibliographies</option>
+                                <option value="c">Catalogs</option>
+                                <option value="d">Dictionaries</option>
+                                <option value="e">Encyclopedias</option>
+                                <option value="f">Handbooks</option>
+                                <option value="g">Legal articles</option>
+                                <option value="i">Indexes</option>
+                                <option value="j">Patent document</option>
+                                <option value="k">Discographies</option>
+                                <option value="l">Legislation</option>
+                                <option value="m">Theses</option>
+                                <option value="n">Surveys of literature in a subject area</option>
+                                <option value="o">Reviews</option>
+                                <option value="p">Programmed texts</option>
+                                <option value="q">Filmographies</option>
+                                <option value="r">Directories</option>
+                                <option value="s">Statistics</option>
+                                <option value="t">Technical reports</option>
+                                <option value="u">Standards/specifications</option>
+                                <option value="v">Legal cases and case notes</option>
+                                <option value="w">Law reports and digests</option>
+                                <option value="y">Yearbooks</option>
+                                <option value="z">Treaties</option>
+                                <option value="2">Offprints</option>
+                                <option value="5">Calendars</option>
+                                <option value="6">Comics/graphic novels</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p27">24-27 - Nature of contents (006/07-10)</label>
+                            <select class="form-select" aria-label="Nature of contents" id="p27" v-model="f008.p27">
+                                <option value="#">No specified nature of contents</option>
+                                <option value="a">Abstracts/summaries</option>
+                                <option value="b">Bibliographies</option>
+                                <option value="c">Catalogs</option>
+                                <option value="d">Dictionaries</option>
+                                <option value="e">Encyclopedias</option>
+                                <option value="f">Handbooks</option>
+                                <option value="g">Legal articles</option>
+                                <option value="i">Indexes</option>
+                                <option value="j">Patent document</option>
+                                <option value="k">Discographies</option>
+                                <option value="l">Legislation</option>
+                                <option value="m">Theses</option>
+                                <option value="n">Surveys of literature in a subject area</option>
+                                <option value="o">Reviews</option>
+                                <option value="p">Programmed texts</option>
+                                <option value="q">Filmographies</option>
+                                <option value="r">Directories</option>
+                                <option value="s">Statistics</option>
+                                <option value="t">Technical reports</option>
+                                <option value="u">Standards/specifications</option>
+                                <option value="v">Legal cases and case notes</option>
+                                <option value="w">Law reports and digests</option>
+                                <option value="y">Yearbooks</option>
+                                <option value="z">Treaties</option>
+                                <option value="2">Offprints</option>
+                                <option value="5">Calendars</option>
+                                <option value="6">Comics/graphic novels</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p28">28 - Government publication (006/11)</label>
+                            <select class="form-select" aria-label="Government publication" id="p28" v-model="f008.p28">
+                                <option value="#">Not a government publication</option>
+                                <option value="a">Autonomous or semi-autonomous component</option>
+                                <option value="c">Multilocal</option>
+                                <option value="f">Federal/national</option>
+                                <option value="i">International intergovernmental</option>
+                                <option value="l">Local</option>
+                                <option value="m">Multistate</option>
+                                <option value="o">Government publication-level undetermined</option>
+                                <option value="s">State, provincial, territorial, dependent, etc.</option>
+                                <option value="u">Unknown if item is government publication</option>
+                                <option value="z">Other</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p29">29 - Conference publication (006/12)</label>
+                            <select class="form-select" aria-label="Conference publication" id="p29" v-model="f008.p29">
+                                <option value="0">Not a conference publication</option>
+                                <option value="1">Conference publication</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p30">30 - Festschrift (006/13)</label>
+                            <select class="form-select" aria-label="Festschrift" id="p30" v-model="f008.p30">
+                                <option value="0">Not a festschrift</option>
+                                <option value="1">Festschrift</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+                     
+                            <label for="p31">31 - Index (006/14)</label>
+                            <select class="form-select" aria-label="Index" id="p31" v-model="f008.p31">
+                                <option value="0">No index</option>
+                                <option value="1">Index present</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p33">33 - Literary form (006/16)</label>
+                            <select class="form-select" aria-label="Literary form" id="p33" v-model="f008.p33">
+                                <option value="0">Not fiction (not further specified)</option>
+                                <option value="1">Fiction (not further specified)</option>
+                                <option value="d">Dramas</option>
+                                <option value="e">Essays</option>
+                                <option value="f">Novels</option>
+                                <option value="h">Humor, satires, etc.</option>
+                                <option value="i">Letters</option>
+                                <option value="j">Short stories</option>
+                                <option value="m">Mixed forms</option>
+                                <option value="p">Poetry</option>
+                                <option value="s">Speeches</option>
+                                <option value="u">Unknown</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
+
+                            <label for="p34">34 - Biography (006/17)</label>
+                            <select class="form-select" aria-label="Biography" id="p34" v-model="f008.p34">
+                                <option value="#">No biographical material</option>
+                                <option value="a">Autobiography</option>
+                                <option value="b">Individual biography</option>
+                                <option value="c">Collective biography</option>
+                                <option value="d">Contains biographical information</option>
+                                <option value="|">No attempt to code</option>
+                            </select>
 
                         </div>
                         <!-- /008 -->
@@ -331,6 +592,11 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+
+
     <script>
         var app = new Vue({
             el: '#editor',
@@ -356,7 +622,22 @@
                     p00_05: '000000',
                     p06: 's',
                     p07_10: '0000',
-                    p11_14: '####'
+                    p11_14: '####',
+                    p15_17: 'bl#',
+                    p18_21: '#',
+                    p22: '#',
+                    p23: 'r',
+                    p24: '#',
+                    p25: '#',
+                    p26: '#',
+                    p27: '#',
+                    p28: '#',
+                    p29: '0',
+                    p30: '0',
+                    p31: '0',
+                    p32: '#',
+                    p33: '0',
+                    p34: '#'
                 },
                 crossrefRecord: null,
                 ISBNRecord: null,
@@ -393,13 +674,17 @@
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
                     this.ldr.multipart_resource_record_level + '4500' +
                     '\n=005  ' + this.record._005 +
-                    '\n=008  ' + this.f008.p00_05 + this.f008.p06 + this.f008.p07_10 + this.f008.p11_14 +
+                    '\n=008  ' + this.f008.p00_05 + this.f008.p06 + this.f008.p07_10 + this.f008.p11_14 + this.f008.p15_17 + this.f008.p18_21 + this.f008.p22 + this.f008.p23 +
+                    this.f008.p24 + this.f008.p25 + this.f008.p26 + this.f008.p27 + this.f008.p28 + this.f008.p29 + this.f008.p30 + this.f008.p31 + this.f008.p32 +
+                    this.f008.p33 + this.f008.p34 +
                     (this.record.isbn ? '\n=020  ##$a' + this.record.isbn : '') +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '') +
-                    '\n=260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
-                    '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '')
+                    '\n=260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + 
+                    (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
+                    '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
+                    (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '')
                 }
             },
             mounted() {
@@ -494,7 +779,6 @@
                 }
             }
         })
-    </script>
-        
+    </script>        
   </body>
 </html>
