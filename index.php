@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+    
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -2081,12 +2081,12 @@
                         this.record._260b = this.crossrefRecord.data.message.publisher,
                         this.record._260c = this.crossrefRecord.data.message.issued['date-parts'][0][0],
                         this.f008.p07_10 = this.crossrefRecord.data.message.issued['date-parts'][0][0]
-                        // Object.values(this.crossrefRecord.data.message.author).forEach(val => {
-                        //     this.record.author.push({ id: "", name: val.given + " " + val.family, function: "Author" });
-                        // });
-                        // if (this.crossrefRecord.data.message.ISBN) {
-                        //     this.record.isbn[0].id = this.crossrefRecord.data.message.ISBN.[0]
-                        // }
+                        Object.values(this.crossrefRecord.data.message.author).forEach(val => {
+                            this.record.personal_name.push({ ind1: '1', a: val.family + ', ' + val.given });
+                        });
+                        if (this.crossrefRecord.data.message.ISBN) {
+                            this.record.isbn = this.crossrefRecord.data.message.ISBN[0]
+                        }
                         })
                         .catch(function (error) {
                         console.log(error);
@@ -2104,9 +2104,9 @@
                         this.record._260c = this.ISBNRecord.items[0].volumeInfo.publishedDate,
                         this.f008.p07_10 = this.ISBNRecord.items[0].volumeInfo.publishedDate
                         //this.record.numberOfPages = this.ISBNRecord.items.[0].volumeInfo.pageCount
-                        //Object.values(this.ISBNRecord.items.[0].volumeInfo.authors).forEach(val => {
-                        //    this.record.author.push({ id: "", name: val, function: "" });
-                        //});
+                        Object.values(this.ISBNRecord.items.[0].volumeInfo.authors).forEach(val => {
+                           this.record.author.push({ ind1: '1', a: val });
+                        });
                         })
                         .catch(function (error) {
                         console.log(error);
