@@ -1789,30 +1789,30 @@
                         </div>
                         <!-- \040 -->
 
-      <!-- 100 -->
-      <template>
-        <div class="input-group mb-2" v-for="(author, indexAuthor) in record.personal_name">
+                        <!-- 100 -->
+                        <template>
+                            <div class="input-group mb-2" v-for="(author, indexAuthor) in record.personal_name">
 
-            <span class="input-group-text" id="title">Personal Name</span>
-            <div class="input-group-prepend">
-                <select class="input-group-text form-select" id="_100_ind1" v-model="record.personal_name[indexAuthor].ind1">
-                    <option disabled>Type of personal name entry element</option>
-                    <option value="0">0 - Forename</option>
-                    <option value="1">1 - Surname</option>
-                    <option value="3">3 - Family name</option>
-                </select>
-            </div>
-            <input type="text" id="_100a" v-model="record.personal_name[indexAuthor].a" class="form-control" placeholder="Personal name" aria-label="Personal name" aria-describedby="_100a">
-            <input type="text" id="_100d" v-model="record.personal_name[indexAuthor].d" class="form-control" placeholder="Dates associated with a name" aria-label="Dates associated with a name" aria-describedby="_100d">
-            <input type="text" id="_100q" v-model="record.personal_name[indexAuthor].q" class="form-control" placeholder="Fuller form of name" aria-label="Fuller form of name" aria-describedby="_100q">
-            <button @click="deleteField('personal_name', indexAuthor)" class="btn btn-danger btn-sm">Delete</button>
-        </div>
+                                <span class="input-group-text" id="title">Personal Name</span>
+                                <div class="input-group-prepend">
+                                    <select class="input-group-text form-select" id="_100_ind1" v-model="record.personal_name[indexAuthor].ind1">
+                                        <option disabled>Type of personal name entry element</option>
+                                        <option value="0">0 - Forename</option>
+                                        <option value="1">1 - Surname</option>
+                                        <option value="3">3 - Family name</option>
+                                    </select>
+                                </div>
+                                <input type="text" id="_100a" v-model="record.personal_name[indexAuthor].a" class="form-control" placeholder="Personal name" aria-label="Personal name" aria-describedby="_100a">
+                                <input type="text" id="_100d" v-model="record.personal_name[indexAuthor].d" class="form-control" placeholder="Dates associated with a name" aria-label="Dates associated with a name" aria-describedby="_100d">
+                                <input type="text" id="_100q" v-model="record.personal_name[indexAuthor].q" class="form-control" placeholder="Fuller form of name" aria-label="Fuller form of name" aria-describedby="_100q">
+                                <button @click="deleteField('personal_name', indexAuthor)" class="btn btn-danger btn-sm">Delete</button>
+                            </div>
 
-        <button @click="addField('personal_name')" class="btn btn-info btn-sm mb-2">
-          Add Personal Name
-        </button>
-      </template>
-      <!-- \100 -->
+                            <button @click="addField('personal_name')" class="btn btn-info btn-sm mb-2">
+                            Add Personal Name
+                            </button>
+                        </template>
+                        <!-- \100 -->
 
 
                         <!-- TITLE -->
@@ -1838,7 +1838,7 @@
                                     <option value="7">7</option>
                                 </select>
                             </div>
-                            <input type="text" id="title" v-model="record.title" class="form-control" aria-label="Title statement" aria-describedby="title">
+                            <input type="text" id="title" v-model="record.title" class="form-control" placeholder="Title statement" aria-label="Title statement" aria-describedby="title">
                         </div>
                         <!-- \TITLE -->
                         <!-- SUBTITLE -->
@@ -1882,6 +1882,34 @@
                             <input type="text" id="_310a" v-model="record._310a" class="form-control" placeholder="Current publication frequency" aria-label="Current publication frequency" aria-describedby="_310a">
                         </div>
                         <!-- \310 -->
+                        <!-- 856 -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="title">Electronic Location and Access</span>
+                            <div class="input-group-prepend">
+                                <select class="input-group-text form-select" id="_856_ind1" v-model="record._856_ind1">
+                                    <option disabled>Access method</option>
+                                    <option value="#"># - No information provided</option>
+                                    <option value="0">0 - Email</option>
+                                    <option value="1">1 - FTP</option>
+                                    <option value="2">2 - Remote login (Telnet)</option>
+                                    <option value="3">3 - Dial-up</option>
+                                    <option value="4">4 - HTTP</option>
+                                    <option value="7">7 - Method specified in subfield $2</option>
+                                </select>
+                            </div>
+                            <div class="input-group-prepend">
+                                <select class="input-group-text form-select" id="_856_ind2" v-model="record._856_ind2">
+                                    <option disabled>Relationship</option>
+                                    <option value="#"># - No information provided</option>
+                                    <option value="0">0 - Resource</option>
+                                    <option value="1">1 - Version of resource</option>
+                                    <option value="2">2 - Related resource</option>
+                                    <option value="8">8 - No display constant generated</option>
+                                </select>
+                            </div>
+                            <input type="text" id="url" v-model="record._856u" class="form-control" placeholder="Uniform Resource Identifier" aria-label="Uniform Resource Identifier" aria-describedby="url">
+                        </div>
+                        <!-- \856 -->
 
                     </div>
                     <div class="col-6 col-md-4">
@@ -1991,7 +2019,10 @@
                     _300a: null,
                     _300b: null,
                     _300c: null,
-                    _310a: null
+                    _310a: null,
+                    _856_ind1: '4',
+                    _856_ind2: '0',
+                    _856u: null,
                 },
                 copySuccessful: false,
                 current_ldr: null,
@@ -2030,7 +2061,8 @@
                     (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
                     '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
                     (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
-                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') + this.record.personal_names_array.join("")
+                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') + this.record.personal_names_array.join("") +
+                    (this.record._856u ? '\n=856 '+ this.record._856_ind1 + this.record._856_ind2 + '$u' + this.record._856u : '')
 
 
                 }
@@ -2072,7 +2104,7 @@
                         .then((response) => {
                         this.crossrefRecord = response,
                         this.record.title = this.crossrefRecord.data.message.title,
-                        // this.record.url = this.crossrefRecord.data.message.URL,
+                        this.record._856u = this.crossrefRecord.data.message.URL,
                         this.record._260b = this.crossrefRecord.data.message.publisher,
                         this.record._260c = this.crossrefRecord.data.message.issued['date-parts'][0][0],
                         this.f008.p07_10 = this.crossrefRecord.data.message.issued['date-parts'][0][0]
@@ -2098,7 +2130,7 @@
                         //this.record.abstract = this.ISBNRecord.items.[0].volumeInfo.description,
                         this.record._260c = this.ISBNRecord.items[0].volumeInfo.publishedDate,
                         this.f008.p07_10 = this.ISBNRecord.items[0].volumeInfo.publishedDate
-                        //this.record.numberOfPages = this.ISBNRecord.items.[0].volumeInfo.pageCount
+                        this.record._300a = this.ISBNRecord.items[0].volumeInfo.pageCount + 'p.'
                         Object.values(this.ISBNRecord.items[0].volumeInfo.authors).forEach(val => {
                            this.record.author.push({ ind1: '1', a: val });
                         });
