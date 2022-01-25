@@ -10,15 +10,10 @@
     
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
 
-    
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
-
-
-
+    <!-- Bootstrap-select - Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
 
     <title>Online MARC Editor</title>
   </head>
@@ -2104,7 +2099,7 @@
                         this.record._260c = this.ISBNRecord.items[0].volumeInfo.publishedDate,
                         this.f008.p07_10 = this.ISBNRecord.items[0].volumeInfo.publishedDate
                         //this.record.numberOfPages = this.ISBNRecord.items.[0].volumeInfo.pageCount
-                        Object.values(this.ISBNRecord.items.[0].volumeInfo.authors).forEach(val => {
+                        Object.values(this.ISBNRecord.items[0].volumeInfo.authors).forEach(val => {
                            this.record.author.push({ ind1: '1', a: val });
                         });
                         })
