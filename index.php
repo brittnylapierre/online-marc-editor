@@ -2078,22 +2078,14 @@
                     this.record[field].push({ ind1: "1", a: "", d: null, q: null });
                 },
                 copyTestingCode () {
-                    let testingCodeToCopy = document.querySelector('#complete_record')
-                    testingCodeToCopy.setAttribute('type', 'text')
-                    testingCodeToCopy.select()
-
                     try {
-                        var successful = document.execCommand('copy');
+                        var successful = navigator.clipboard.writeText(this.complete_record);
                         var msg = successful ? 'successful' : 'unsuccessful';
                         this.copySuccessful = true
                         setTimeout(() => {   this.copySuccessful = false; }, 2000);
                     } catch (err) {
                         alert('Oops, unable to copy');
                     }
-
-                    /* unselect the range */
-                    testingCodeToCopy.setAttribute('type', 'hidden')
-                    window.getSelection().removeAllRanges()
                 },
                 deleteField: function (field, index) {
                     this.record[field].splice(index, 1);
