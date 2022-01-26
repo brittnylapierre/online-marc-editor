@@ -1851,21 +1851,19 @@
                         <!-- \SUBTITLE -->
 
                         <!-- 260 -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="title">Imprint</span>
-                            <div class="input-group-prepend">
+                        <div class="input-group mb-3 col">
+                            <span class="input-group-text col-md-1" id="title">Imprint</span>
+                            <div class="input-group-prepend col-md-2">
                                 <select class="input-group-text form-select" id="_260_ind1" v-model="record._260_ind1">
-                                    <option value="#">#</option>
+                                    <option disabled>Sequence of publishing statements</option>
+                                    <option value="#"># - Not applicable/No information provided/Earliest available publisher</option>
+                                    <option value="2">2 - Intervening publisher</option>
+                                    <option value="3">3 - Current/latest publisher</option>
                                 </select>
                             </div>
-                            <div class="input-group-prepend">
-                                <select class="input-group-text form-select" id="_260_ind2" v-model="record._260_ind2">
-                                    <option value="#">#</option>
-                                </select>
-                            </div>
-                            <input type="text" id="_260a" v-model="record._260a" class="form-control" placeholder="Place of publication" aria-label="Place of publication" aria-describedby="_260a">
-                            <input type="text" id="_260b" v-model="record._260b" class="form-control" placeholder="Name of publisher" aria-label="Name of publisher" aria-describedby="_260b">
-                            <input type="text" id="_260c" v-model="record._260c" class="form-control" placeholder="Date of publication" aria-label="Date of publication" aria-describedby="_260c">
+                            <input type="text" id="_260a" v-model="record._260a" class="form-control col-md-3" placeholder="Place of publication" aria-label="Place of publication" aria-describedby="_260a">
+                            <input type="text" id="_260b" v-model="record._260b" class="form-control col-md-3" placeholder="Name of publisher" aria-label="Name of publisher" aria-describedby="_260b">
+                            <input type="text" id="_260c" v-model="record._260c" class="form-control col-md-3" placeholder="Date of publication" aria-label="Date of publication" aria-describedby="_260c">
                         </div>
                         <!-- \260 -->
 
