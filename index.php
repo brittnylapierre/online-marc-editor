@@ -1618,17 +1618,17 @@
                                 <table class="table p-2 text-dark">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Fonte</th>
-                                            <th scope="col">Título</th>
-                                            <th scope="col">Autor</th>
-                                            <th scope="col">Outros autores</th>
-                                            <th scope="col">Editora</th>
-                                            <th scope="col">Local</th>
-                                            <th scope="col">Data de publicação</th>
-                                            <th scope="col">Descrição física</th>
-                                            <th scope="col">Idioma</th>
-                                            <th scope="col">Edição</th>
-                                            <th scope="col">Usar</th>
+                                            <th scope="col">Source</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Authors</th>
+                                            <th scope="col">Others authors</th>
+                                            <th scope="col">Publisher</th>
+                                            <th scope="col">Place</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Physical description</th>
+                                            <th scope="col">Language</th>
+                                            <th scope="col">Edition</th>
+                                            <th scope="col">Use</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1651,7 +1651,7 @@
                                                     record._260b = Z3950Record.publisher,
                                                     record._300a = Z3950Record.extent
                                                     f008.p35_37 = Z3950Record.language
-                                                ">Usar</button>
+                                                ">Use</button>
                                             </td>
                                         </tr>
                                     </tbody>
