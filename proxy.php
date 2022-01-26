@@ -31,7 +31,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 	$url = $_REQUEST["url"];
-	
+	var_dump($url);
 	if (substr ($url, 0, 7) != "http://"
 		&& substr ($url, 0, 8) != "https://"
 		&& substr ($url, 0, 6) != "ftp://") {
