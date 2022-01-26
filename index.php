@@ -2139,7 +2139,7 @@
                 },
                 getZ3950(isbn, host, hostname) {
                     axios
-                    .get("proxy.php?url=http://tecbib.com/api/z3950?isbn=" + isbn + '&host=' + host)
+                    .get("proxy.php?url=http://tecbib.com/api/z3950?isbn=" + isbn + '%26host=' + host)
                     .then((response) => {
                     if(this.Z3950Records !== null) {
                         Object.values(response.data).forEach(val => {
