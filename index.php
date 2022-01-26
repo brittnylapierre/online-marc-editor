@@ -1613,7 +1613,7 @@
                                 ">Z39.50</button>
                             </div>
 
-                            <div class="alert alert-info alert-dismissible fade show bg-opacity-10" role="alert">
+                            <div class="alert alert-info alert-dismissible fade show bg-opacity-10" role="alert" v-show="Z3950Records">
                                 <table class="table p-2 text-dark">
                                     <thead>
                                         <tr>
@@ -2135,7 +2135,7 @@
                 },
                 getZ3950(isbn, host, hostname) {
                     axios
-                    .get("http://34.134.188.198/api/z3950?isbn=" + isbn + '&host=' + host)
+                    .get("http://tecbib.com/api/z3950?isbn=" + isbn + '&host=' + host)
                     .then((response) => {
                     if(this.Z3950Records !== null) {
                         Object.values(response.data).forEach(val => {
