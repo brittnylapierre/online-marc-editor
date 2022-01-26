@@ -1609,6 +1609,7 @@
                                     getZ3950(record.isbn, 'dedalus.usp.br:9991/usp01', 'USP/DEDALUS'),
                                     getZ3950(record.isbn, 'unesp.alma.exlibrisgroup.com:1921/55UNESP_INST', 'UNESP'),
                                     getZ3950(record.isbn, '162.214.168.248:9998/bib', 'BN'),
+                                    getZ3950(record.isbn, 'z3950.loc.gov:7090/Voyager', 'Library of Congress'),
                                     loadingZ3950 = true
                                 ">Z39.50</button>
                             </div>
@@ -1645,8 +1646,11 @@
                                             <td>
                                                 <button class="btn btn-info btn-sm m-2" @click="
                                                     record.title = Z3950Record.title,
+                                                    record.subtitle = Z3950Record.subtitle,
                                                     record._260c = Z3950Record.pub_date,
-                                                    record._260b = Z3950Record.publisher
+                                                    record._260b = Z3950Record.publisher,
+                                                    record._300a = Z3950Record.extent
+                                                    f008.p35_37 = Z3950Record.language
                                                 ">Usar</button>
                                             </td>
                                         </tr>
