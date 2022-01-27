@@ -2124,9 +2124,10 @@
                     (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
                     '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
                     (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
-                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') + this.record.personal_names_array.join("") +
+                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') +                     
                     this.record.general_note_array.join("") +
                     this.record._650_array.join("") +
+                    this.record.personal_names_array.join("") +
                     (this.record._856u ? '\n=856 '+ this.record._856_ind1 + this.record._856_ind2 + '$u' + this.record._856u : '')
 
 
