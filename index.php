@@ -1886,6 +1886,7 @@
                             <input type="text" id="_310a" v-model="record._310a" class="form-control" placeholder="Current publication frequency" aria-label="Current publication frequency" aria-describedby="_310a">
                         </div>
                         <!-- \310 -->
+
                         <!-- 500 -->
 
                         <div class="input-group mb-2" v-for="(note, indexNote) in record.general_note">
@@ -1895,6 +1896,40 @@
                         </div>
 
                         <button @click="addField('general_note')" class="btn btn-info btn-sm mb-2">Add General Note</button>
+
+                        <!-- \500 -->
+
+                        <!-- 650 -->
+                        <div class="input-group mb-3" v-for="(subjectTT, indexSubjectTT) in record._650">
+                            <span class="input-group-text" id="title">Subject Added Entry-Topical Term</span>
+                            <div class="input-group-prepend">
+                                <select class="input-group-text form-select" id="_650_ind1" v-model="record._650[indexSubjectTT].ind1">
+                                    <option disabled>Level of subject</option>
+                                    <option value="#"># - No information provided</option>
+                                    <option value="0">0 - No level specified</option>
+                                    <option value="1">1 - Primary</option>
+                                    <option value="2">2 - Secondary</option>
+                                </select>
+                            </div>
+                            <div class="input-group-prepend">
+                                <select class="input-group-text form-select" id="_650_ind2" v-model="record._650[indexSubjectTT].ind2">
+                                    <option disabled>Thesaurus</option>
+                                    <option value="0">0 - Library of Congress Subject Headings</option>
+                                    <option value="1">1 - LC subject headings for children's literature</option>
+                                    <option value="2">2 - Medical Subject Headings</option>
+                                    <option value="3">3 - National Agricultural Library subject authority file</option>
+                                    <option value="4">4 - Source not specified</option>
+                                    <option value="5">5 - Canadian Subject Headings</option>
+                                    <option value="6">6 - Répertoire de vedettes-matière</option>
+                                    <option value="7">7 - Source specified in subfield $2</option>
+                                </select>
+                            </div>
+                            <input type="text" id="tt" v-model="record._650[indexSubjectTT].a" class="form-control" placeholder="Topical term or geographic name entry element" aria-label="Topical term or geographic name entry element" aria-describedby="_650a">
+                            <input type="text" id="_6502" v-model="record._650[indexSubjectTT]._2" class="form-control" placeholder="Source of heading or term" aria-label="Source of heading or term" aria-describedby="_6502" v-if="record._650[indexSubjectTT].ind2 == '7'">
+                            <button @click="deleteField('_650', indexSubjectTT)" class="btn btn-danger btn-sm">Delete</button>
+                        </div>
+                        <button @click="addField('_650')" class="btn btn-info btn-sm mb-2">Add Subject Added Entry-Topical Term</button>
+                        <!-- \650 -->
 
                         <!-- 856 -->
                         <div class="input-group mb-3">
@@ -2036,6 +2071,8 @@
                     _310a: null,
                     general_note: [],
                     general_note_array: [],
+                    _650: [],
+                    _650_array: [],
                     _856_ind1: '4',
                     _856_ind2: '0',
                     _856u: null,
@@ -2060,6 +2097,11 @@
                     this.record.general_note_array = [];
                     for (this.i_general_note = 0; this.i_general_note < this.record.general_note.length; this.i_general_note++) {
                         this.record.general_note_array.push('\n=500  ##$a' + this.record.general_note[this.i_general_note].a);
+                    }
+
+                    this.record._650_array = [];
+                    for (this.i_650 = 0; this.i_650 < this.record._650.length; this.i_650++) {
+                        this.record._650_array.push('\n=650  ' + this.record._650[this.i_650].ind1 + this.record._650[this.i_650].ind2 + '$a' + this.record._650[this.i_650].a + (this.record._650[this.i_650].ind2 == '7' ? '$2' + this.record._650[this.i_650]._2 : ''));
                     }     
 
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
@@ -2084,6 +2126,7 @@
                     (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
                     (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') + this.record.personal_names_array.join("") +
                     this.record.general_note_array.join("") +
+                    this.record._650_array.join("") +
                     (this.record._856u ? '\n=856 '+ this.record._856_ind1 + this.record._856_ind2 + '$u' + this.record._856u : '')
 
 
@@ -2097,7 +2140,22 @@
                     if (this.record[field] === null) {
                         this.record[field] = [];
                     }
-                    this.record[field].push({ ind1: "1", a: "", d: null, q: null });
+                    switch (field) {
+                        case "personal_name":
+                            this.record[field].push({ ind1: "1", a: "", d: null, q: null });
+                            break;
+                        case "_650":
+                            this.record[field].push({ ind1: "0", ind2: "4", a: "", _2: ""});
+                            break;
+                        case "general_note":
+                            this.record[field].push({ a: ""});
+                            break;
+                        case "_536":
+                            this.record[field].push({ a: "", f: ""});
+                            break;
+                        default:
+                        this.record[field].push({ a: ""});
+                    }
                 },
                 copyTestingCode () {
                     try {
