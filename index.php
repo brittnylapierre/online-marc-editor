@@ -1886,6 +1886,16 @@
                             <input type="text" id="_310a" v-model="record._310a" class="form-control" placeholder="Current publication frequency" aria-label="Current publication frequency" aria-describedby="_310a">
                         </div>
                         <!-- \310 -->
+                        <!-- 500 -->
+
+                        <div class="input-group mb-2" v-for="(note, indexNote) in record.general_note">
+                            <span class="input-group-text" id="title">General Note</span>
+                            <input type="text" id="_500a" v-model="record.general_note[indexNote].a" class="form-control" placeholder="General Note" aria-label="General Note" aria-describedby="_500a">
+                            <button @click="deleteField('general_note', indexNote)" class="btn btn-danger btn-sm">Delete</button>
+                        </div>
+
+                        <button @click="addField('general_note')" class="btn btn-info btn-sm mb-2">Add General Note</button>
+
                         <!-- 856 -->
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="title">Electronic Location and Access</span>
@@ -2024,6 +2034,8 @@
                     _300b: null,
                     _300c: null,
                     _310a: null,
+                    general_note: [],
+                    general_note_array: [],
                     _856_ind1: '4',
                     _856_ind2: '0',
                     _856u: null,
@@ -2043,7 +2055,12 @@
                     for (this.i_personal_name = 1; this.i_personal_name < this.record.personal_name.length; this.i_personal_name++) {
                         this.record.personal_names_array.push('\n=700  ' + this.record.personal_name[this.i_personal_name].ind1 + '#$a' + this.record.personal_name[this.i_personal_name].a + (this.record.personal_name[this.i_personal_name].d ? '$d' + this.record.personal_name[this.i_personal_name].d : '') + (this.record.personal_name[this.i_personal_name].q ? '$q' + this.record.personal_name[this.i_personal_name].q : ''));
                     }                    
-                    this.i_personal_name = 1;            
+                    this.i_personal_name = 1;
+
+                    this.record.general_note_array = [];
+                    for (this.i_general_note = 0; this.i_general_note < this.record.general_note.length; this.i_general_note++) {
+                        this.record.general_note_array.push('\n=500  ##$a' + this.record.general_note[this.i_general_note].a);
+                    }     
 
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
@@ -2066,6 +2083,7 @@
                     '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
                     (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
                     (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') + this.record.personal_names_array.join("") +
+                    this.record.general_note_array.join("") +
                     (this.record._856u ? '\n=856 '+ this.record._856_ind1 + this.record._856_ind2 + '$u' + this.record._856u : '')
 
 
