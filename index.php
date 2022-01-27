@@ -1900,10 +1900,10 @@
                         <!-- \500 -->
 
                         <!-- 650 -->
-                        <div class="input-group mb-3" v-for="(subjectTT, indexSubjectTT) in record._650">
+                        <div class="input-group mb-3 col" v-for="(subjectTT, indexSubjectTT) in record._650">
                             <span class="input-group-text" id="title">Subject Added Entry-Topical Term</span>
-                            <div class="input-group-prepend">
-                                <select class="input-group-text form-select" id="_650_ind1" v-model="record._650[indexSubjectTT].ind1">
+                            <div class="input-group-prepend col-md-1">
+                                <select class="input-group-text form-select " id="_650_ind1" v-model="record._650[indexSubjectTT].ind1">
                                     <option disabled>Level of subject</option>
                                     <option value="#"># - No information provided</option>
                                     <option value="0">0 - No level specified</option>
@@ -1911,8 +1911,8 @@
                                     <option value="2">2 - Secondary</option>
                                 </select>
                             </div>
-                            <div class="input-group-prepend">
-                                <select class="input-group-text form-select" id="_650_ind2" v-model="record._650[indexSubjectTT].ind2">
+                            <div class="input-group-prepend col-md-1">
+                                <select class="input-group-text form-select " id="_650_ind2" v-model="record._650[indexSubjectTT].ind2">
                                     <option disabled>Thesaurus</option>
                                     <option value="0">0 - Library of Congress Subject Headings</option>
                                     <option value="1">1 - LC subject headings for children's literature</option>
@@ -1924,9 +1924,9 @@
                                     <option value="7">7 - Source specified in subfield $2</option>
                                 </select>
                             </div>
-                            <input type="text" id="tt" v-model="record._650[indexSubjectTT].a" class="form-control" placeholder="Topical term or geographic name entry element" aria-label="Topical term or geographic name entry element" aria-describedby="_650a">
-                            <input type="text" id="_6502" v-model="record._650[indexSubjectTT]._2" class="form-control" placeholder="Source of heading or term" aria-label="Source of heading or term" aria-describedby="_6502" v-if="record._650[indexSubjectTT].ind2 == '7'">
-                            <button @click="deleteField('_650', indexSubjectTT)" class="btn btn-danger btn-sm">Delete</button>
+                            <input type="text" id="tt" v-model="record._650[indexSubjectTT].a" class="form-control col-md-3" placeholder="Topical term or geographic name entry element" aria-label="Topical term or geographic name entry element" aria-describedby="_650a">
+                            <input type="text" id="_6502" v-model="record._650[indexSubjectTT]._2" class="form-control col-md-3" placeholder="Source of heading or term" aria-label="Source of heading or term" aria-describedby="_6502" v-if="record._650[indexSubjectTT].ind2 == '7'">
+                            <button @click="deleteField('_650', indexSubjectTT)" class="btn btn-danger btn-sm col-md-1">Delete</button>
                         </div>
                         <button @click="addField('_650')" class="btn btn-info btn-sm mb-2">Add Subject Added Entry-Topical Term</button>
                         <!-- \650 -->
