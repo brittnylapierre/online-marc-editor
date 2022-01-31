@@ -1863,9 +1863,6 @@
                         </div>
                         <!-- /LDR -->
 
-
-                        <br/><br/>
-
                         <!-- 001 -->
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="_001">Control Number</span>
