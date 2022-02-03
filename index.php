@@ -1689,14 +1689,11 @@
 
                         <!-- ISBN -->
                         <div v-show="isbnShow" class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <div class="alert alert-warning" role="alert" v-show="loadingISBN">
-                                Searching in Google Books ...
-                            </div>
-                            <div class="alert alert-warning" role="alert" v-show="loadingZ3950">
-                                Searching Z39.50 servers ...
-                            </div>
+                            <div class="alert alert-warning" role="alert" v-show="loadingISBN">Searching in Google Books ...</div>
+                            <div class="alert alert-warning" role="alert" v-show="loadingZ3950">Searching Z39.50 servers ...</div>
+                            <button @click="addField('isbn')" class="btn btn-info btn-sm mb-2">Add ISBN</button>
 
-                            <div class="input-group mb-2">
+                            <div class="input-group mb-2" v-for="(isbn, indexisbn) in record.isbn">
                                 <div class="input-group-prepend"><span class="input-group-text">ISBN&nbsp;&nbsp;
                                     <a href="https://www.loc.gov/marc/bibliographic/bd020.html" rel="external" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
@@ -1705,15 +1702,16 @@
                                     </svg>
                                     </a>
                                 </span></div>
-                                <input type="text" class="form-control" v-model.trim="record.isbn" id="isbn" name="isbn" placeholder="Enter ISBN">
-                                <button class="btn btn-info" @click="getISBNGoogleBooks(record.isbn), loadingISBN = true">Google Books</button>
+                                <input type="text" class="form-control" v-model.trim="isbn.id" id="isbn" name="isbn" placeholder="Enter ISBN">
+                                <button class="btn btn-info" @click="getISBNGoogleBooks(record.isbn[indexisbn].id), loadingISBN = true">Google Books</button>
                                 <button class="btn btn-info" @click="
-                                    getZ3950(record.isbn, 'dedalus.usp.br:9991/usp01', 'USP/DEDALUS'),
-                                    getZ3950(record.isbn, 'unesp.alma.exlibrisgroup.com:1921/55UNESP_INST', 'UNESP'),
-                                    getZ3950(record.isbn, '162.214.168.248:9998/bib', 'BN'),
-                                    getZ3950(record.isbn, 'z3950.loc.gov:7090/Voyager', 'Library of Congress'),
+                                    getZ3950(record.isbn[indexisbn].id, 'dedalus.usp.br:9991/usp01', 'USP/DEDALUS'),
+                                    getZ3950(record.isbn[indexisbn].id, 'unesp.alma.exlibrisgroup.com:1921/55UNESP_INST', 'UNESP'),
+                                    getZ3950(record.isbn[indexisbn].id, '162.214.168.248:9998/bib', 'BN'),
+                                    getZ3950(record.isbn[indexisbn].id, 'z3950.loc.gov:7090/Voyager', 'Library of Congress'),
                                     loadingZ3950 = true
                                 ">Z39.50</button>
+                                <button @click="deleteField('isbn', indexisbn)" class="btn btn-danger btn-sm">Apagar</button>
                             </div>
 
                             <div class="alert alert-info alert-dismissible fade show bg-opacity-10" role="alert" v-show="Z3950Records">
@@ -2227,7 +2225,8 @@
                     _245_ind2: '0',
                     subtitle: null,
                     doi:null,
-                    isbn:null,
+                    isbn:[],
+                    isbn_array: [],
                     _260_ind1: "#",
                     _260_ind2: "#",
                     _260a: null,
@@ -2258,6 +2257,11 @@
             computed: {
                 complete_record: function(){
 
+                    this.record.isbn_array = [];
+                    for (this.i_isbn = 0; this.i_isbn < this.record.isbn.length; this.i_isbn++) {
+                        this.record.isbn_array.push('\n=020  ##$a' + this.record.isbn[this.i_isbn].id);
+                    }
+
                     this.record.personal_names_array = [];
                     for (this.i_personal_name = 1; this.i_personal_name < this.record.personal_name.length; this.i_personal_name++) {
                         this.record.personal_names_array.push('\n=700  ' + this.record.personal_name[this.i_personal_name].ind1 + '#$a' + this.record.personal_name[this.i_personal_name].a + (this.record.personal_name[this.i_personal_name].d ? '$d' + this.record.personal_name[this.i_personal_name].d : '') + (this.record.personal_name[this.i_personal_name].q ? '$q' + this.record.personal_name[this.i_personal_name].q : ''));
@@ -2284,7 +2288,7 @@
                     this.f008.p20 + this.f008.p21 + this.f008.p22 + this.f008.p23 +
                     this.f008.p24 + this.f008.p25 + this.f008.p26 + this.f008.p27 + this.f008.p28 + this.f008.p29 + this.f008.p30 + this.f008.p31 + this.f008.p32 +
                     this.f008.p33 + this.f008.p34 +  this.f008.p35_37 + this.f008.p38 + this.f008.p39 +
-                    (this.record.isbn ? '\n=020  ##$a' + this.record.isbn : '') +
+                    this.record.isbn_array.join("") +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=040  ##$a' + this.record._040a + '$c' + this.record._040c +
                     (this.record.personal_name[0] ? '\n=100  ' + this.record.personal_name[0].ind1 + '#$a' + this.record.personal_name[0].a + (this.record.personal_name[0].d ? '$d' + this.record.personal_name[0].d : '') + (this.record.personal_name[0].q ? '$q' + this.record.personal_name[0].q : '') : '') +
@@ -2312,6 +2316,9 @@
                         this.record[field] = [];
                     }
                     switch (field) {
+                        case "isbn":
+                            this.record[field].push({ id: "" });
+                            break;
                         case "personal_name":
                             this.record[field].push({ ind1: "1", a: "", d: null, q: null });
                             break;
