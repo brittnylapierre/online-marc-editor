@@ -15,6 +15,7 @@
     <!-- Bootstrap core CSS -->
 <link href="inc/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+
 <meta name="theme-color" content="#7952b3">
 
 
@@ -1697,8 +1698,8 @@
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend"><span class="input-group-text">ISBN</span></div>
                                 <input type="text" class="form-control" v-model.trim="record.isbn" id="isbn" name="isbn" placeholder="Enter ISBN">
-                                <button class="btn btn-info btn-sm m-2" @click="getISBNGoogleBooks(record.isbn), loadingISBN = true">Google Books</button>
-                                <button class="btn btn-info btn-sm m-2" @click="
+                                <button class="btn btn-info" @click="getISBNGoogleBooks(record.isbn), loadingISBN = true">Google Books</button>
+                                <button class="btn btn-info" @click="
                                     getZ3950(record.isbn, 'dedalus.usp.br:9991/usp01', 'USP/DEDALUS'),
                                     getZ3950(record.isbn, 'unesp.alma.exlibrisgroup.com:1921/55UNESP_INST', 'UNESP'),
                                     getZ3950(record.isbn, '162.214.168.248:9998/bib', 'BN'),
@@ -1865,21 +1866,42 @@
 
                         <!-- 001 -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="_001">Control Number</span>
+                            <span class="input-group-text" id="_001">Control Number&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd001.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <input type="text" id="_001" v-model="record._001" class="form-control" placeholder="Control Number" aria-label="Control Number" aria-describedby="_001">
                         </div>
                         <!-- \001 -->
 
                         <!-- 003 -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="_003">Control Number Identifier</span>
+                            <span class="input-group-text" id="_003">Control Number Identifier&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd003.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <input type="text" id="_003" v-model="record._003" class="form-control" placeholder="Control Number Identifier" aria-label="Control Number Identifier" aria-describedby="_003">
                         </div>
                         <!-- \003 -->
 
                         <!-- 040 -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="_040">Cataloging Source</span>
+                            <span class="input-group-text" id="_040">Cataloging Source&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd040.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <input type="text" id="_040a" v-model="record._040a" class="form-control" placeholder="Original cataloging agency" aria-label="Original cataloging agency" aria-describedby="_040a">
                             <input type="text" id="_040c" v-model="record._040c" class="form-control" placeholder="Transcribing agency" aria-label="Transcribing agency" aria-describedby="_040c">
                         </div>
@@ -1913,7 +1935,14 @@
 
                         <!-- TITLE -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="title">Title</span>
+                            <span class="input-group-text" id="title">Title&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd245.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <div class="input-group-prepend">
                                 <select class="input-group-text form-select" id="_245_ind1" v-model="record._245_ind1">
                                     <option disabled>Title added entry</option>
@@ -1946,7 +1975,14 @@
 
                         <!-- 260 -->
                         <div class="input-group mb-3 col">
-                            <span class="input-group-text col-md-1" id="title">Imprint</span>
+                            <span class="input-group-text col-md-1" id="title">Imprint&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd260.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <div class="input-group-prepend col-md-2">
                                 <select class="input-group-text form-select" id="_260_ind1" v-model="record._260_ind1">
                                     <option disabled>Sequence of publishing statements</option>
@@ -1963,7 +1999,14 @@
 
                         <!-- 300 -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="_300">Physical Description</span>
+                            <span class="input-group-text" id="_300">Physical Description&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd300.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <input type="text" id="_300a" v-model="record._300a" class="form-control" placeholder="Extent (R)" aria-label="Extent (R)" aria-describedby="_300a">
                             <input type="text" id="_300b" v-model="record._300b" class="form-control" placeholder="Other physical details (NR)" aria-label="Other physical details (NR)" aria-describedby="_300b">
                             <input type="text" id="_300c" v-model="record._300c" class="form-control" placeholder="Dimensions (R)" aria-label="Dimensions (R)" aria-describedby="_300c">
@@ -1972,7 +2015,14 @@
 
                         <!-- 310 -->
                         <div class="input-group mb-3" v-if="recordType === 'Serial'">
-                            <span class="input-group-text" id="_310">Current Publication Frequency</span>
+                            <span class="input-group-text" id="_310">Current Publication Frequency&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd310.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <input type="text" id="_310a" v-model="record._310a" class="form-control" placeholder="Current publication frequency" aria-label="Current publication frequency" aria-describedby="_310a">
                         </div>
                         <!-- \310 -->
@@ -1980,7 +2030,14 @@
                         <!-- 500 -->
 
                         <div class="input-group mb-2" v-for="(note, indexNote) in record.general_note">
-                            <span class="input-group-text" id="title">General Note</span>
+                            <span class="input-group-text" id="general_note">General Note&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd500.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <input type="text" id="_500a" v-model="record.general_note[indexNote].a" class="form-control" placeholder="General Note" aria-label="General Note" aria-describedby="_500a">
                             <button @click="deleteField('general_note', indexNote)" class="btn btn-danger btn-sm">Delete</button>
                         </div>
@@ -1991,7 +2048,14 @@
 
                         <!-- 650 -->
                         <div class="input-group mb-3 col" v-for="(subjectTT, indexSubjectTT) in record._650">
-                            <span class="input-group-text" id="title">Subject Added Entry-Topical Term</span>
+                            <span class="input-group-text" id="subject_tt">Subject Added Entry-Topical Term&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd650.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <div class="input-group-prepend col-md-1">
                                 <select class="input-group-text form-select " id="_650_ind1" v-model="record._650[indexSubjectTT].ind1">
                                     <option disabled>Level of subject</option>
@@ -2023,7 +2087,14 @@
 
                         <!-- 856 -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="title">Electronic Location and Access</span>
+                            <span class="input-group-text" id="title">Electronic Location and Access&nbsp;&nbsp;
+                                <a href="https://www.loc.gov/marc/bibliographic/bd856.html" rel="external" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                </a>
+                            </span>
                             <div class="input-group-prepend">
                                 <select class="input-group-text form-select" id="_856_ind1" v-model="record._856_ind1">
                                     <option disabled>Access method</option>
