@@ -1918,7 +1918,7 @@
                         <template>
                             <div class="input-group mb-2" v-for="(author, indexAuthor) in record.personal_name">
 
-                                <span class="input-group-text" id="title">Personal Name</span>
+                                <span class="input-group-text" id="personal_name">Personal Name</span>
                                 <div class="input-group-prepend">
                                     <select class="input-group-text form-select" id="_100_ind1" v-model="record.personal_name[indexAuthor].ind1">
                                         <option disabled>Type of personal name entry element</option>
@@ -1938,6 +1938,29 @@
                             </button>
                         </template>
                         <!-- \100 -->
+
+                        <!-- 110 -->
+                        <template>
+                            <div class="input-group mb-2" v-for="(corporate, indexCorporate) in record.corporate_name">
+
+                                <span class="input-group-text" id="corporate_name">Corporate Name</span>
+                                <div class="input-group-prepend">
+                                    <select class="input-group-text form-select" id="_110_ind1" v-model="record.corporate_name[indexCorporate].ind1">
+                                        <option disabled>Type of corporate name entry element</option>
+                                        <option value="0">0 - Inverted name</option>
+                                        <option value="1">1 - Jurisdiction name</option>
+                                        <option value="2">2 - Name in direct order</option>
+                                    </select>
+                                </div>
+                                <input type="text" id="_100a" v-model="record.corporate_name[indexCorporate].a" class="form-control" placeholder="Corporate name or jurisdiction name as entry element" aria-label="Corporate name or jurisdiction name as entry element" aria-describedby="_100a">
+                                <button @click="deleteField('corporate_name', indexCorporate)" class="btn btn-danger btn-sm">Delete</button>
+                            </div>
+
+                            <button @click="addField('corporate_name')" class="btn btn-info btn-sm mb-2">
+                            Add Corporate Name
+                            </button>
+                        </template>
+                        <!-- \110 -->
 
 
                         <!-- TITLE -->
@@ -2223,6 +2246,8 @@
                     title: "",
                     personal_name: [],
                     personal_names_array: [],
+                    corporate_name: [],
+                    corporate_names_array: [],
                     _245_ind1: '1',
                     _245_ind2: '0',
                     subtitle: null,
@@ -2269,6 +2294,12 @@
                     }                    
                     this.i_personal_name = 1;
 
+                    this.record.corporate_names_array = [];
+                    for (this.i_corporate_name = 1; this.i_corporate_name < this.record.corporate_name.length; this.i_corporate_name++) {
+                        this.record.corporate_names_array.push('\n=710  ' + this.record.corporate_name[this.i_corporate_name].ind1 + '#$a' + this.record.corporate_name[this.i_corporate_name].a + (this.record.corporate_name[this.i_corporate_name].d ? '$d' + this.record.corporate_name[this.i_corporate_name].d : '') + (this.record.corporate_name[this.i_corporate_name].q ? '$q' + this.record.corporate_name[this.i_corporate_name].q : ''));
+                    }                    
+                    this.i_corporate_name = 1;
+
                     this.record.general_note_array = [];
                     for (this.i_general_note = 0; this.i_general_note < this.record.general_note.length; this.i_general_note++) {
                         this.record.general_note_array.push('\n=500  ##$a' + this.record.general_note[this.i_general_note].a);
@@ -2298,6 +2329,7 @@
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=040  ##$a' + this.record._040a + '$c' + this.record._040c +
                     (this.record.personal_name[0] ? '\n=100  ' + this.record.personal_name[0].ind1 + '#$a' + this.record.personal_name[0].a + (this.record.personal_name[0].d ? '$d' + this.record.personal_name[0].d : '') + (this.record.personal_name[0].q ? '$q' + this.record.personal_name[0].q : '') : '') +
+                    (this.record.corporate_name[0] ? '\n=110  ' + this.record.corporate_name[0].ind1 + '#$a' + this.record.corporate_name[0].a + (this.record.corporate_name[0].d ? '$d' + this.record.corporate_name[0].d : '') + (this.record.corporate_name[0].q ? '$q' + this.record.corporate_name[0].q : '') : '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '') +
                     '\n=260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + 
@@ -2308,6 +2340,7 @@
                     this.record.general_note_array.join("") +
                     this.record._650_array.join("") +
                     this.record.personal_names_array.join("") +
+                    this.record.corporate_names_array.join("") +
                     this.record._856_array.join("")
 
                 }
@@ -2326,6 +2359,9 @@
                             break;
                         case "personal_name":
                             this.record[field].push({ ind1: "1", a: "", d: null, q: null });
+                            break;
+                        case "corporate_name":
+                            this.record[field].push({ ind1: "2", a: "" });
                             break;
                         case "_650":
                             this.record[field].push({ ind1: "0", ind2: "4", a: "", _2: ""});
