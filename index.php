@@ -2093,7 +2093,7 @@
                         <!-- \650 -->
 
                         <!-- 856 -->
-                        <div class="input-group mb-3" v-for="(url, indexURL) in record._856">
+                        <div class="input-group mb-3 col" v-for="(url, indexURL) in record._856">
                             <span class="input-group-text" id="title">Electronic Location and Access&nbsp;&nbsp;
                                 <a href="https://www.loc.gov/marc/bibliographic/bd856.html" rel="external" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
@@ -2102,7 +2102,7 @@
                                 </svg>
                                 </a>
                             </span>
-                            <div class="input-group-prepend">
+                            <div class="input-group-prepend col-md-1">
                                 <select class="input-group-text form-select" id="_856_ind1" v-model="record._856[indexURL].ind1">
                                     <option disabled>Access method</option>
                                     <option value="#"># - No information provided</option>
@@ -2114,7 +2114,7 @@
                                     <option value="7">7 - Method specified in subfield $2</option>
                                 </select>
                             </div>
-                            <div class="input-group-prepend">
+                            <div class="input-group-prepend col-md-1">
                                 <select class="input-group-text form-select" id="_856_ind2" v-model="record._856[indexURL].ind2">
                                     <option disabled>Relationship</option>
                                     <option value="#"># - No information provided</option>
@@ -2124,7 +2124,7 @@
                                     <option value="8">8 - No display constant generated</option>
                                 </select>
                             </div>
-                            <input type="text" id="url" v-model="record._856[indexURL].u" class="form-control" placeholder="Uniform Resource Identifier" aria-label="Uniform Resource Identifier" aria-describedby="url">
+                            <input type="text" id="url" v-model="record._856[indexURL].u" class="form-control col-md-6" placeholder="Uniform Resource Identifier" aria-label="Uniform Resource Identifier" aria-describedby="url">
                             <button @click="deleteField('_856', indexURL)" class="btn btn-danger btn-sm col-md-1">Delete</button>
                         </div>
                         <button @click="addField('_856')" class="btn btn-info btn-sm mb-2">Add Electronic Location and Access</button>
