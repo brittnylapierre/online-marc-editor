@@ -2093,7 +2093,7 @@
                         <!-- \650 -->
 
                         <!-- 856 -->
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3" v-for="(url, indexURL) in record._856">
                             <span class="input-group-text" id="title">Electronic Location and Access&nbsp;&nbsp;
                                 <a href="https://www.loc.gov/marc/bibliographic/bd856.html" rel="external" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
@@ -2103,7 +2103,7 @@
                                 </a>
                             </span>
                             <div class="input-group-prepend">
-                                <select class="input-group-text form-select" id="_856_ind1" v-model="record._856_ind1">
+                                <select class="input-group-text form-select" id="_856_ind1" v-model="record._856[indexURL].ind1">
                                     <option disabled>Access method</option>
                                     <option value="#"># - No information provided</option>
                                     <option value="0">0 - Email</option>
@@ -2115,7 +2115,7 @@
                                 </select>
                             </div>
                             <div class="input-group-prepend">
-                                <select class="input-group-text form-select" id="_856_ind2" v-model="record._856_ind2">
+                                <select class="input-group-text form-select" id="_856_ind2" v-model="record._856[indexURL].ind2">
                                     <option disabled>Relationship</option>
                                     <option value="#"># - No information provided</option>
                                     <option value="0">0 - Resource</option>
@@ -2124,8 +2124,10 @@
                                     <option value="8">8 - No display constant generated</option>
                                 </select>
                             </div>
-                            <input type="text" id="url" v-model="record._856u" class="form-control" placeholder="Uniform Resource Identifier" aria-label="Uniform Resource Identifier" aria-describedby="url">
+                            <input type="text" id="url" v-model="record._856[indexURL].u" class="form-control" placeholder="Uniform Resource Identifier" aria-label="Uniform Resource Identifier" aria-describedby="url">
+                            <button @click="deleteField('_856', indexURL)" class="btn btn-danger btn-sm col-md-1">Delete</button>
                         </div>
+                        <button @click="addField('_856')" class="btn btn-info btn-sm mb-2">Add Electronic Location and Access</button>
                         <!-- \856 -->
 
 
@@ -2242,9 +2244,8 @@
                     general_note_array: [],
                     _650: [],
                     _650_array: [],
-                    _856_ind1: '4',
-                    _856_ind2: '0',
-                    _856u: null,
+                    _856: [],
+                    _856_array: []
                 },
                 copySuccessful: false,
                 current_ldr: null,
@@ -2276,7 +2277,12 @@
                     this.record._650_array = [];
                     for (this.i_650 = 0; this.i_650 < this.record._650.length; this.i_650++) {
                         this.record._650_array.push('\n=650  ' + this.record._650[this.i_650].ind1 + this.record._650[this.i_650].ind2 + '$a' + this.record._650[this.i_650].a + (this.record._650[this.i_650].ind2 == '7' ? '$2' + this.record._650[this.i_650]._2 : ''));
-                    }     
+                    }
+
+                    this.record._856_array = [];
+                    for (this.i_856 = 0; this.i_856 < this.record._856.length; this.i_856++) {
+                        this.record._856_array.push('\n=856  ' + this.record._856[this.i_856].ind1 + this.record._856[this.i_856].ind2 + '$u' + this.record._856[this.i_856].u);
+                    }
 
                     return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
                     this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
@@ -2302,8 +2308,7 @@
                     this.record.general_note_array.join("") +
                     this.record._650_array.join("") +
                     this.record.personal_names_array.join("") +
-                    (this.record._856u ? '\n=856 '+ this.record._856_ind1 + this.record._856_ind2 + '$u' + this.record._856u : '')
-
+                    this.record._856_array.join("")
 
                 }
             },
@@ -2324,6 +2329,9 @@
                             break;
                         case "_650":
                             this.record[field].push({ ind1: "0", ind2: "4", a: "", _2: ""});
+                            break;
+                        case "_856":
+                            this.record[field].push({ ind1: "4", ind2: "0", u: ""});
                             break;
                         case "general_note":
                             this.record[field].push({ a: ""});
