@@ -2037,9 +2037,9 @@
                                 </svg>
                                 </a>
                             </span>
-                            <input type="text" id="_300a" v-model="record._300a" class="form-control" placeholder="Extent (R)" aria-label="Extent (R)" aria-describedby="_300a">
-                            <input type="text" id="_300b" v-model="record._300b" class="form-control" placeholder="Other physical details (NR)" aria-label="Other physical details (NR)" aria-describedby="_300b">
-                            <input type="text" id="_300c" v-model="record._300c" class="form-control" placeholder="Dimensions (R)" aria-label="Dimensions (R)" aria-describedby="_300c">
+                            <input type="text" id="_300a" v-model="record._300a" class="form-control" placeholder="Extent" aria-label="Extent" aria-describedby="_300a">
+                            <input type="text" id="_300b" v-model="record._300b" class="form-control" placeholder="Other physical details" aria-label="Other physical details" aria-describedby="_300b">
+                            <input type="text" id="_300c" v-model="record._300c" class="form-control" placeholder="Dimensions" aria-label="Dimensions" aria-describedby="_300c">
                         </div>
                         <!-- \300 -->
 
