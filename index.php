@@ -2002,6 +2002,12 @@
                             <input type="text" id="subtitle" v-model="record.subtitle" class="form-control" aria-label="Subtitle statement" aria-describedby="subtitle">
                         </div>
                         <!-- \SUBTITLE -->
+                        <!-- 245c -->
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="title">Statement of responsibility, etc.</span>
+                            <input type="text" id="245c" v-model="record._245c" class="form-control" aria-label="Statement of responsibility, etc." aria-describedby="245c">
+                        </div>
+                        <!-- \245c -->
 
                         <!-- 260 -->
                         <div class="input-group mb-3 col">
@@ -2251,6 +2257,7 @@
                     _245_ind1: '1',
                     _245_ind2: '0',
                     subtitle: null,
+                    _245c: "",
                     doi:null,
                     isbn:[],
                     isbn_array: [],
@@ -2332,6 +2339,7 @@
                     (this.record.corporate_name[0] ? '\n=110  ' + this.record.corporate_name[0].ind1 + '#$a' + this.record.corporate_name[0].a + (this.record.corporate_name[0].d ? '$d' + this.record.corporate_name[0].d : '') + (this.record.corporate_name[0].q ? '$q' + this.record.corporate_name[0].q : '') : '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '') +
+                    (this.record._245c ? '$c' + this.record._245c : '') +
                     '\n=260  ' + this.record._260_ind1 + this.record._260_ind2 + (this.record._260a ? '$a' + this.record._260a : '') + 
                     (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
                     '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
