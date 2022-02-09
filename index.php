@@ -129,7 +129,7 @@
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-warning" @click="validate()">Validate</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary" @click="validation._245a=''">Clear validation</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" @click="validation._245a='', errors = null">Clear validation</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" @click="cleanAll()">Clear all record</button>
             <!--
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
