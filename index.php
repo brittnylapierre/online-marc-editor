@@ -1787,7 +1787,7 @@
                         <!-- LDR -->
                         <div v-show="ldrShow" class="alert alert-warning alert-dismissible fade show" role="alert">
                             <label for="record_status">05 - Record status</label>
-                            <select class="form-select" aria-label="Record status" id="record_status" v-model="ldr.record_status">
+                            <select class="form-select" aria-label="Record status" id="record_status" v-model="record.ldr.record_status">
                                 <option value="a">a - Increase in encoding level</option>
                                 <option value="c">c - Corrected or revised</option>
                                 <option value="d">d - Deleted</option>
@@ -1795,7 +1795,7 @@
                                 <option value="p">p - Increase in encoding level from prepublication</option>
                             </select>
                             <label for="type_of_record">06 - Type of record</label>
-                            <select class="form-select" aria-label="Type of record" id="type_of_record" v-model="ldr.type_of_record">
+                            <select class="form-select" aria-label="Type of record" id="type_of_record" v-model="record.ldr.type_of_record">
                                 <option value="a">a - Language material</option>
                                 <option value="c">c - Notated music</option>
                                 <option value="d">d - Manuscript notated music</option>
@@ -1812,7 +1812,7 @@
                                 <option value="t">t - Manuscript language material</option>
                             </select>
                             <label for="bibliographic_level">07 - Bibliographic level</label>
-                            <select class="form-select" aria-label="Bibliographic level" id="bibliographic_level" v-model="ldr.bibliographic_level">
+                            <select class="form-select" aria-label="Bibliographic level" id="bibliographic_level" v-model="record.ldr.bibliographic_level">
                                 <option value="a">a - Monographic component part</option>
                                 <option value="b">b - Serial component part</option>
                                 <option value="c">c - Collection</option>
@@ -1822,12 +1822,12 @@
                                 <option value="s">s - Serial</option>
                             </select>
                             <label for="type_of_control">08 - Type of control</label>
-                            <select class="form-select" aria-label="Type of control" id="type_of_control" v-model="ldr.type_of_control">
+                            <select class="form-select" aria-label="Type of control" id="type_of_control" v-model="record.ldr.type_of_control">
                                 <option value="#"># - No specified type</option>
                                 <option value="a">a - Archival</option>
                             </select>
                             <label for="character_coding_scheme">09 - Character coding scheme</label>
-                            <select class="form-select" aria-label="Character coding scheme" id="character_coding_scheme" v-model="ldr.character_coding_scheme">
+                            <select class="form-select" aria-label="Character coding scheme" id="character_coding_scheme" v-model="record.ldr.character_coding_scheme">
                                 <option value="#"># - MARC-8</option>
                                 <option value="a">a - UCS/Unicode</option>
                             </select>
@@ -1836,7 +1836,7 @@
                                 <input v-model="base_address_of_data" type="text" class="form-control" id="base_address_of_data">
                             </div> -->
                             <label for="encoding_level">17 - Encoding level</label>
-                            <select class="form-select" aria-label="Encoding level" id="encoding_level" v-model="ldr.encoding_level">
+                            <select class="form-select" aria-label="Encoding level" id="encoding_level" v-model="record.ldr.encoding_level">
                                 <option value="#"># - Full level</option>
                                 <option value="1">1 - Full level, material not examined</option>
                                 <option value="2">2 - Less-than-full level, material not examined</option>
@@ -1854,7 +1854,7 @@
                                 <option value="M">M - Less-than-full cataloging added from tapeloading</option>
                             </select>
                             <label for="descriptive_cataloging_form">18 - Descriptive cataloging form</label>
-                            <select class="form-select" aria-label="Descriptive cataloging form" id="descriptive_cataloging_form" v-model="ldr.descriptive_cataloging_form">
+                            <select class="form-select" aria-label="Descriptive cataloging form" id="descriptive_cataloging_form" v-model="record.ldr.descriptive_cataloging_form">
                                 <option value="#"># - Non-ISBD</option>
                                 <option value="a">a - AACR 2</option>
                                 <option value="c">c - ISBD punctuation omitted</option>
@@ -1863,7 +1863,7 @@
                                 <option value="u">u - Unknown</option>
                             </select>
                             <label for="multipart_resource_record_level">19 - Multipart resource record level</label>
-                            <select class="form-select" aria-label="Multipart resource record level" id="multipart_resource_record_level" v-model="ldr.multipart_resource_record_level">
+                            <select class="form-select" aria-label="Multipart resource record level" id="multipart_resource_record_level" v-model="record.ldr.multipart_resource_record_level">
                                 <option value="#"># - Not specified or not applicable</option>
                                 <option value="a">a - Set</option>
                                 <option value="b">b - Part with independent title</option>
@@ -2213,18 +2213,7 @@
                 doiShow: false,
                 isbnShow: false,
                 f008Show: false,
-                ldr:{
-                    record_length: '00000',
-                    record_status: 'n',
-                    type_of_record: 'a',
-                    bibliographic_level: 'm',
-                    type_of_control: "#",
-                    character_coding_scheme: "a",
-                    base_address_of_data:'00000', 
-                    encoding_level: "I",
-                    descriptive_cataloging_form: "a",
-                    multipart_resource_record_level: "#"
-                },
+
                 validation:{
                     _245a: '',
                 },
@@ -2260,6 +2249,18 @@
                 Z3950Records: null,
                 recordType: 'Book',
                 record: {
+                    ldr:{
+                        record_length: '00000',
+                        record_status: 'n',
+                        type_of_record: 'a',
+                        bibliographic_level: 'm',
+                        type_of_control: "#",
+                        character_coding_scheme: "a",
+                        base_address_of_data:'00000', 
+                        encoding_level: "I",
+                        descriptive_cataloging_form: "a",
+                        multipart_resource_record_level: "#"
+                    },
                     _001: "",
                     _003: "",
                     _005: "",
@@ -2338,9 +2339,9 @@
                         this.record._856_array.push('\n=856  ' + this.record._856[this.i_856].ind1 + this.record._856[this.i_856].ind2 + '$u' + this.record._856[this.i_856].u);
                     }
 
-                    return '\n=LDR  ' + this.ldr.record_length + this.ldr.record_status + this.ldr.type_of_record + this.ldr.bibliographic_level + this.ldr.type_of_control + 
-                    this.ldr.character_coding_scheme + '22' + this.ldr.base_address_of_data + this.ldr.encoding_level + this.ldr.descriptive_cataloging_form + 
-                    this.ldr.multipart_resource_record_level + '4500' +
+                    return '\n=LDR  ' + this.record.ldr.record_length + this.record.ldr.record_status + this.record.ldr.type_of_record + this.record.ldr.bibliographic_level + this.record.ldr.type_of_control + 
+                    this.record.ldr.character_coding_scheme + '22' + this.record.ldr.base_address_of_data + this.record.ldr.encoding_level + this.record.ldr.descriptive_cataloging_form + 
+                    this.record.ldr.multipart_resource_record_level + '4500' +
                     '\n=001  ' + this.record._001 +
                     '\n=003  ' + this.record._003 +
                     '\n=005  ' + this.record._005 +
