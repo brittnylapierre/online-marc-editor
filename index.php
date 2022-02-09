@@ -1918,21 +1918,35 @@
 
                         <!-- 100 -->
                         <template>
-                            <div class="input-group mb-2" v-for="(author, indexAuthor) in record.personal_name">
-
-                                <span class="input-group-text" id="personal_name">Personal Name</span>
-                                <div class="input-group-prepend">
-                                    <select class="input-group-text form-select" id="_100_ind1" v-model="record.personal_name[indexAuthor].ind1">
-                                        <option disabled>Type of personal name entry element</option>
-                                        <option value="0">0 - Forename</option>
-                                        <option value="1">1 - Surname</option>
-                                        <option value="3">3 - Family name</option>
-                                    </select>
+                            <div class="row mb-2" v-for="(author, indexAuthor) in record.personal_name">
+                                <div class='col-2'>
+                                    <span class="input-group-text" id="personal_name">Personal Name&nbsp;&nbsp;
+                                        <a href="https://www.loc.gov/marc/bibliographic/bd100.html" rel="external" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                        </svg>
+                                        </a>
+                                    </span>
                                 </div>
-                                <input type="text" id="_100a" v-model="record.personal_name[indexAuthor].a" class="form-control" placeholder="Personal name" aria-label="Personal name" aria-describedby="_100a">
-                                <input type="text" id="_100d" v-model="record.personal_name[indexAuthor].d" class="form-control" placeholder="Dates associated with a name" aria-label="Dates associated with a name" aria-describedby="_100d">
-                                <input type="text" id="_100q" v-model="record.personal_name[indexAuthor].q" class="form-control" placeholder="Fuller form of name" aria-label="Fuller form of name" aria-describedby="_100q">
-                                <button @click="deleteField('personal_name', indexAuthor)" class="btn btn-danger btn-sm">Delete</button>
+                                <div class="col-9">
+                                    <div class="input-group-prepend">
+                                        <select class="input-group-text form-select" id="_100_ind1" v-model="record.personal_name[indexAuthor].ind1">
+                                            <option disabled>Type of personal name entry element</option>
+                                            <option value="0">0 - Forename</option>
+                                            <option value="1">1 - Surname</option>
+                                            <option value="3">3 - Family name</option>
+                                        </select>
+                                    </div>                                
+                                    <input type="text" id="_100a" v-model="record.personal_name[indexAuthor].a" class="form-control" placeholder="Personal name" aria-label="Personal name" aria-describedby="_100a">
+                                    <input type="text" id="_100d" v-model="record.personal_name[indexAuthor].d" class="form-control" placeholder="Dates associated with a name" aria-label="Dates associated with a name" aria-describedby="_100d">
+                                    <input type="text" id="_100e" v-model="record.personal_name[indexAuthor].e" class="form-control" placeholder="Relator term" aria-label="Relator term" aria-describedby="_100e">                                    
+                                    <input type="text" id="_100q" v-model="record.personal_name[indexAuthor].q" class="form-control" placeholder="Fuller form of name" aria-label="Fuller form of name" aria-describedby="_100q">
+                                    <input type="text" id="_100u" v-model="record.personal_name[indexAuthor].u" class="form-control" placeholder="Affiliation" aria-label="Affiliation" aria-describedby="_100u">
+                                </div>
+                                <div class="col-1">
+                                    <button @click="deleteField('personal_name', indexAuthor)" class="btn btn-danger btn-sm">Delete</button>
+                                </div>
                             </div>
 
                             <button @click="addField('personal_name')" class="btn btn-info btn-sm mb-2">
@@ -1945,7 +1959,14 @@
                         <template>
                             <div class="input-group mb-2" v-for="(corporate, indexCorporate) in record.corporate_name">
 
-                                <span class="input-group-text" id="corporate_name">Corporate Name</span>
+                                <span class="input-group-text" id="corporate_name">Corporate Name&nbsp;&nbsp;
+                                    <a href="https://www.loc.gov/marc/bibliographic/bd110.html" rel="external" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                    </a>
+                                </span>
                                 <div class="input-group-prepend">
                                     <select class="input-group-text form-select" id="_110_ind1" v-model="record.corporate_name[indexCorporate].ind1">
                                         <option disabled>Type of corporate name entry element</option>
@@ -2361,7 +2382,11 @@
                     this.record.isbn_array.join("") +
                     (this.record.doi ? '\n=024  70$a' + this.record.doi + '$2doi': '') +
                     '\n=040  ##$a' + this.record._040a + '$c' + this.record._040c +
-                    (this.record.personal_name[0] ? '\n=100  ' + this.record.personal_name[0].ind1 + '#$a' + this.record.personal_name[0].a + (this.record.personal_name[0].d ? '$d' + this.record.personal_name[0].d : '') + (this.record.personal_name[0].q ? '$q' + this.record.personal_name[0].q : '') : '') +
+                    (this.record.personal_name[0] ? '\n=100  ' + this.record.personal_name[0].ind1 + '#$a' + this.record.personal_name[0].a + 
+                        (this.record.personal_name[0].d ? '$d' + this.record.personal_name[0].d : '') +
+                        (this.record.personal_name[0].e ? '$e' + this.record.personal_name[0].e : '') +
+                        (this.record.personal_name[0].q ? '$q' + this.record.personal_name[0].q : '') + 
+                        (this.record.personal_name[0].u ? '$u' + this.record.personal_name[0].u : '') : '') +
                     (this.record.corporate_name[0] ? '\n=110  ' + this.record.corporate_name[0].ind1 + '#$a' + this.record.corporate_name[0].a + (this.record.corporate_name[0].d ? '$d' + this.record.corporate_name[0].d : '') + (this.record.corporate_name[0].q ? '$q' + this.record.corporate_name[0].q : '') : '') +
                     '\n=245  ' + this.record._245_ind1 + this.record._245_ind2 + '$a' + this.record.title +
                     (this.record.subtitle ? '$b' + this.record.subtitle : '') +
