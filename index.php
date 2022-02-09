@@ -7,6 +7,9 @@
     <meta name="author" content="Tiago Murakami">
     <meta name="generator" content="Boostrap and Vue">
     <title>Online MARC Editor</title>
+    
+    <!-- Facebook Open Graph -->
+    <meta property="og:title" content="Online MARC Editor" />
 
     <link rel="canonical" href="https://online-marc-editor.herokuapp.com">
 
