@@ -128,7 +128,9 @@
         <h1 class="h2">Editor</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary" @click="cleanAll()">Clear all</button>
+            <button type="button" class="btn btn-sm btn-outline-warning" @click="validate()">Validate</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" @click="validation._245a=''">Clear validation</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" @click="cleanAll()">Clear all record</button>
             <!--
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
@@ -1998,7 +2000,7 @@
                             </div>
                             <div class="input-group">
                                 <span class="input-group-text" id="title">Title</span>
-                                <input type="text" id="title" v-model="record.title" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="title">
+                                <input type="text" id="title" v-model="record.title" class="form-control" :class="validation._245a" placeholder="Title" aria-label="Title" aria-describedby="title">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-text" id="subtitle">Subtitle</span>
@@ -2222,6 +2224,9 @@
                     encoding_level: "I",
                     descriptive_cataloging_form: "a",
                     multipart_resource_record_level: "#"
+                },
+                validation:{
+                    _245a: '',
                 },
                 f008:{
                     p00_05: '000000',
@@ -2489,6 +2494,13 @@
                 update005() {
                     let today = new Date().toISOString().replace('-', '').replace('-', '').replace('T', '').replace(':', '').replace(':', '').substr(0,16);
                     this.record._005 = today
+                },
+                validate() {
+                    if (this.record.title == "") {
+                        this.validation._245a = "is-invalid";
+                    } else {
+                        this.validation._245a = "is-valid";
+                    }
                 }
             }
         })
