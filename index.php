@@ -78,13 +78,13 @@
         </h6>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" type="button" @click="recordType='Book';ldr.bibliographic_level='m';ldr.type_of_record='a';f008.p19='#';f008.p21='#';f008.p33='0';f008.p34='#'">
+            <a class="nav-link" type="button" @click="recordType='Book';record.ldr.bibliographic_level='m';record.ldr.type_of_record='a';record.f008.p19='#';record.f008.p21='#';record.f008.p33='0';record.f008.p34='#'">
               <span data-feather="book"></span>                         
               Book
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" type="button" @click="recordType='Serial';ldr.bibliographic_level='s';ldr.type_of_record='a';f008.p19='r';f008.p21='p';f008.p33='#';f008.p34='0'"> 
+            <a class="nav-link" type="button" @click="recordType='Serial';record.ldr.bibliographic_level='s';record.ldr.type_of_record='a';record.f008.p19='r';record.f008.p21='p';record.f008.p33='#';record.f008.p34='0'"> 
               <span data-feather="layers"></span>             
               Serial
             </a>
