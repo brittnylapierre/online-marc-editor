@@ -2534,10 +2534,30 @@
                     this.errors = null;
                     if (this.record.title == "") {
                         this.validation._245a = "is-invalid";
-                        this.errors = [];
+                        if (this.errors == null) {
+                            this.errors = [];
+                        }                                             
                         this.errors.push({ message:'Title is mandatory' });
                     } else {
                         this.validation._245a = "is-valid";
+                    }
+                    if (this.record.f008.p07_10.length != 4) {
+                        if (this.errors == null) {
+                            this.errors = [];
+                        }     
+                        this.errors.push({ message:'008 position 07-10 has invalid length (4 is mandatory)' });
+                    }
+                    if (isNaN(this.record.f008.p07_10)) {
+                        if (this.errors == null) {
+                            this.errors = [];
+                        }     
+                        this.errors.push({ message:'008 position 07-10 is not a valid number' });
+                    }
+                    if (this.record.f008.p07_10 == '0000') {
+                        if (this.errors == null) {
+                            this.errors = [];
+                        }     
+                        this.errors.push({ message:'008 position 07-10 is not a valid number' });
                     }
                 }
             }
