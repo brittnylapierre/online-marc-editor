@@ -92,12 +92,6 @@
               Serial
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" type="button" @click="RDA=true;record._336a='text';record._337a='unmediated';record._338a='object'">
-              <span data-feather="layers"></span>             
-              Add RDA fields (336, 337, 338)
-            </a>
-          </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -126,6 +120,12 @@
             <a class="nav-link" v-on:click="isbnShow = !isbnShow" type="button">
               <span data-feather="file-text"></span>
               ISBN
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" type="button" @click="RDA=true;record._336a='text';record._337a='unmediated';record._338a='object'">
+              <span data-feather="layers"></span>             
+              Add RDA fields (336, 337, 338)
             </a>
           </li>
         </ul>
