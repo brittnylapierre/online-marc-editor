@@ -95,7 +95,7 @@
           <li class="nav-item">
             <a class="nav-link" type="button" @click="RDA=true;record._336a='text';record._337a='unmediated';record._338a='object'">
               <span data-feather="layers"></span>             
-              Enable RDA fields (336, 337, 338)
+              Add RDA fields (336, 337, 338)
             </a>
           </li>
         </ul>
