@@ -93,9 +93,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" type="button" @click="RDA=true;record._336a='text';record._337a='unmediated'"> 
+            <a class="nav-link" type="button" @click="RDA=true;record._336a='text';record._337a='unmediated';record._338a='object'">
               <span data-feather="layers"></span>             
-              Enable RDA fields
+              Enable RDA fields (336, 337, 338)
             </a>
           </li>
         </ul>
@@ -2110,7 +2110,7 @@
 
                             <!-- 336 -->
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="_300">336 - Content Type&nbsp;&nbsp;
+                                <span class="input-group-text" id="_336">336 - Content Type&nbsp;&nbsp;
                                     <a href="https://www.loc.gov/marc/bibliographic/bd336.html" rel="external" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -2154,7 +2154,7 @@
 
                             <!-- 337 -->
                             <div class="input-group mb-3">
-                                <span class="input-group-text" id="_300">337 - Media Type&nbsp;&nbsp;
+                                <span class="input-group-text" id="_337">337 - Media Type&nbsp;&nbsp;
                                     <a href="https://www.loc.gov/marc/bibliographic/bd337.html" rel="external" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -2175,10 +2175,92 @@
                                     <option value="other">other</option>
                                     <option value="unspecified">unspecified</option>
                                 </select>
-                                <input type="text" id="_337b" v-model="_336b" class="form-control" placeholder="MARC code for RDA terms" aria-label="MARC code for RDA terms" aria-describedby="_337b" disabled>
+                                <input type="text" id="_337b" v-model="_337b" class="form-control" placeholder="MARC code for RDA terms" aria-label="MARC code for RDA terms" aria-describedby="_337b" disabled>
                                 <input type="text" id="_3372" v-model="record._3372" class="form-control" placeholder="Source" aria-label="Source" aria-describedby="_3372" disabled>
                             </div>
-                            <!-- \336 -->
+                            <!-- \337 -->
+
+                            <!-- 338 -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="_338">338 - Carrier Type&nbsp;&nbsp;
+                                    <a href="https://www.loc.gov/marc/bibliographic/bd338.html" rel="external" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                    </a>
+                                </span>
+
+
+
+
+
+                  
+
+                                <select class="input-group-text form-select " id="_338a" v-model="record._338a">
+                                    <option disabled>RDA carrier terms</option>                                    
+                                    <option value="audio cartridge" v-if="record._337a == 'audio'">audio cartridge</option>
+                                    <option value="audio belt" v-if="record._337a == 'audio'">audio belt</option>
+                                    <option value="audio cylinder" v-if="record._337a == 'audio'">audio cylinder</option>
+                                    <option value="audio disc" v-if="record._337a == 'audio'">audio disc</option>
+                                    <option value="sound track reel" v-if="record._337a == 'audio'">sound track reel</option>
+                                    <option value="audio roll" v-if="record._337a == 'audio'">audio roll</option>
+                                    <option value="audio wire reel" v-if="record._337a == 'audio'">audio wire reel</option>
+                                    <option value="audiocassette" v-if="record._337a == 'audio'">audiocassette</option>
+                                    <option value="audiotape reel" v-if="record._337a == 'audio'">audiotape reel</option>
+                                    <option value="other" v-if="record._337a == 'audio'">other</option>
+                                    <option value="computer card" v-if="record._337a == 'computer'">computer card</option>
+                                    <option value="computer chip cartridge" v-if="record._337a == 'computer'">computer chip cartridge</option>
+                                    <option value="computer disc" v-if="record._337a == 'computer'">computer disc</option>
+                                    <option value="computer disc cartridge" v-if="record._337a == 'computer'">computer disc cartridge</option>
+                                    <option value="computer tape cartridge" v-if="record._337a == 'computer'">computer tape cartridge</option>
+                                    <option value="computer tape cassette" v-if="record._337a == 'computer'">computer tape cassette</option>
+                                    <option value="computer tape reel" v-if="record._337a == 'computer'">computer tape reel</option>
+                                    <option value="online resource" v-if="record._337a == 'computer'">online resource</option>
+                                    <option value="other" v-if="record._337a == 'computer'">other</option>
+                                    <option value="aperture card" v-if="record._337a == 'microform'">aperture card</option>
+                                    <option value="microfiche" v-if="record._337a == 'microform'">microfiche</option>
+                                    <option value="microfiche cassette" v-if="record._337a == 'microform'">microfiche cassette</option>
+                                    <option value="microfilm cartridge" v-if="record._337a == 'microform'">microfilm cartridge</option>
+                                    <option value="microfilm cassette" v-if="record._337a == 'microform'">microfilm cassette</option>
+                                    <option value="microfilm reel" v-if="record._337a == 'microform'">microfilm reel</option>
+                                    <option value="microfilm roll" v-if="record._337a == 'microform'">microfilm roll</option>
+                                    <option value="microfilm slip" v-if="record._337a == 'microform'">microfilm slip</option>
+                                    <option value="microopaque" v-if="record._337a == 'microform'">microopaque</option>
+                                    <option value="other" v-if="record._337a == 'microform'">other</option>
+                                    <option value="microscope slide" v-if="record._337a == 'microscopic'">microscope slide</option>
+                                    <option value="other" v-if="record._337a == 'microscopic'">other</option>
+                                    <option value="film cartridge" v-if="record._337a == 'projected'">film cartridge</option>
+                                    <option value="film cassette" v-if="record._337a == 'projected'">film cassette</option>
+                                    <option value="film reel" v-if="record._337a == 'projected'">film reel</option>
+                                    <option value="film roll" v-if="record._337a == 'projected'">film roll</option>
+                                    <option value="filmslip" v-if="record._337a == 'projected'">filmslip</option>
+                                    <option value="filmstrip" v-if="record._337a == 'projected'">filmstrip</option>
+                                    <option value="filmstrip cartridge" v-if="record._337a == 'projected'">filmstrip cartridge</option>
+                                    <option value="overhead transparency" v-if="record._337a == 'projected'">overhead transparency</option>
+                                    <option value="slide" v-if="record._337a == 'projected'">slide</option>
+                                    <option value="other" v-if="record._337a == 'projected'">other</option>
+                                    <option value="stereograph card" v-if="record._337a == 'stereographic'">stereograph card</option>
+                                    <option value="stereograph disc" v-if="record._337a == 'stereographic'">stereograph disc</option>
+                                    <option value="other" v-if="record._337a == 'stereographic'">other</option>
+                                    <option value="card" v-if="record._337a == 'unmediated'">card</option>
+                                    <option value="flipchart" v-if="record._337a == 'unmediated'">flipchart</option>
+                                    <option value="roll" v-if="record._337a == 'unmediated'">roll</option>
+                                    <option value="sheet" v-if="record._337a == 'unmediated'">sheet</option>
+                                    <option value="volume" v-if="record._337a == 'unmediated'">volume</option>
+                                    <option value="object" v-if="record._337a == 'unmediated'">object</option>
+                                    <option value="other" v-if="record._337a == 'unmediated'">other</option>
+                                    <option value="video cartridge" v-if="record._337a == 'video'">video cartridge</option>
+                                    <option value="videocassette" v-if="record._337a == 'video'">videocassette</option>
+                                    <option value="videodisc" v-if="record._337a == 'video'">videodisc</option>
+                                    <option value="videotape reel" v-if="record._337a == 'video'">videotape reel</option>
+                                    <option value="other" v-if="record._337a == 'video'">other</option>
+                                    <option value="unspecified" v-if="record._337a == 'unspecified'">unspecified</option>
+                                </select>
+                                <input type="text" id="_338b" v-model="_338b" class="form-control" placeholder="MARC code for RDA terms" aria-label="MARC code for RDA terms" aria-describedby="_338b" disabled>
+                                <input type="text" id="_3382" v-model="record._3382" class="form-control" placeholder="Source" aria-label="Source" aria-describedby="_3382" disabled>
+                            </div>
+                            <!-- \338 -->
 
                         </div>
 
@@ -2407,6 +2489,8 @@
                     _3362: 'rdacontent',
                     _337a: null,
                     _3372: 'rdamedia',
+                    _338a: null,
+                    _3382: 'rdacarrier',
                     general_note: [],
                     general_note_array: [],
                     _650: [],
@@ -2423,7 +2507,8 @@
                 errors: null,
                 RDA: false,
                 _336b: null,
-                _337b: null
+                _337b: null,
+                _338b: null
 
             },
             computed: {
@@ -2489,7 +2574,8 @@
                     (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
                     (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') +   
                     (this.record._336a ? '\n=336 ##$a' + this.record._336a + (this._336b ? '$b' + this._336b : '') + '$2' + this.record._3362 : '') +
-                    (this.record._337a ? '\n=337 ##$a' + this.record._337a + (this._337b ? '$b' + this._337b : '') + '$2' + this.record._3372 : '') +  
+                    (this.record._337a ? '\n=337 ##$a' + this.record._337a + (this._337b ? '$b' + this._337b : '') + '$2' + this.record._3372 : '') +
+                    (this.record._338a ? '\n=338 ##$a' + this.record._338a + (this._338b ? '$b' + this._338b : '') + '$2' + this.record._3382 : '') +
                     this.record.general_note_array.join("") +
                     this.record._650_array.join("") +
                     this.record.personal_names_array.join("") +
@@ -2610,6 +2696,163 @@
                             break;
                         case "unspecified":
                             return 'z'; 
+                            break;
+                        default:
+                        return null;
+                    }
+
+                },
+                _338b: function (){
+                    switch (this.record._338a) {
+                        case "audio cartridge":
+                            return 'sg'; 
+                            break;
+                        case "audio belt":
+                            return 'sb'; 
+                            break;
+                        case "audio cylinder":
+                            return 'se'; 
+                            break;
+                        case "audio disc":
+                            return 'sd'; 
+                            break;
+                        case "sound track reel":
+                            return 'si'; 
+                            break;
+                        case "audio roll":
+                            return 'sq'; 
+                            break;
+                        case "audio wire reel":
+                            return 'sw'; 
+                            break;
+                        case "audiocassette":
+                            return 'ss'; 
+                            break;
+                        case "audiotape reel":
+                            return 'st'; 
+                            break;
+                        case "other":
+                            return 'nz'; 
+                            break;
+                        case "computer card":
+                            return 'ck'; 
+                            break;
+                        case "computer chip cartridge":
+                            return 'cb'; 
+                            break;
+                        case "computer disc":
+                            return 'cd'; 
+                            break;
+                        case "computer disc cartridge":
+                            return 'ce'; 
+                            break;
+                        case "computer tape cartridge":
+                            return 'ca'; 
+                            break;
+                        case "computer tape cassette":
+                            return 'cf'; 
+                            break;
+                        case "computer tape reel":
+                            return 'ch'; 
+                            break;
+                        case "online resource":
+                            return 'cr'; 
+                            break;
+                        case "aperture card":
+                            return 'ha'; 
+                            break;
+                        case "microfiche":
+                            return 'he'; 
+                            break;
+                        case "microfiche cassette":
+                            return 'hf'; 
+                            break;
+                        case "microfilm cartridge":
+                            return 'hb'; 
+                            break;
+                        case "microfilm cassette":
+                            return 'hc'; 
+                            break;
+                        case "microfilm reel":
+                            return 'hd'; 
+                            break;
+                        case "microfilm roll":
+                            return 'hj'; 
+                            break;
+                        case "microfilm slip":
+                            return 'hh'; 
+                            break;
+                        case "microopaque":
+                            return 'hg'; 
+                            break;
+                        case "microscope slide":
+                            return 'pp'; 
+                            break;
+                        case "film cartridge":
+                            return 'mc'; 
+                            break;
+                        case "film cassette":
+                            return 'mf'; 
+                            break;
+                        case "film reel":
+                            return 'mr'; 
+                            break;
+                        case "film roll":
+                            return 'mo'; 
+                            break;
+                        case "filmslip":
+                            return 'gd'; 
+                            break;
+                        case "filmstrip":
+                            return 'gf'; 
+                            break;
+                        case "filmstrip cartridge":
+                            return 'gc'; 
+                            break;
+                        case "overhead transparency":
+                            return 'gt'; 
+                            break;
+                        case "slide":
+                            return 'gs'; 
+                            break;
+                        case "stereograph card":
+                            return 'eh'; 
+                            break;
+                        case "stereograph disc":
+                            return 'es'; 
+                            break;
+                        case "card":
+                            return 'no'; 
+                            break;
+                        case "flipchart":
+                            return 'nn'; 
+                            break;
+                        case "roll":
+                            return 'na'; 
+                            break;
+                        case "sheet":
+                            return 'nb'; 
+                            break;
+                        case "volume":
+                            return 'nc'; 
+                            break;
+                        case "object":
+                            return 'nr'; 
+                            break;
+                        case "video cartridge":
+                            return 'vc'; 
+                            break;
+                        case "videocassette":
+                            return 'vf'; 
+                            break;
+                        case "videodisc":
+                            return 'vd'; 
+                            break;
+                        case "videotape reel":
+                            return 'vr'; 
+                            break;
+                        case "unspecified ":
+                            return 'zu'; 
                             break;
                         default:
                         return null;
