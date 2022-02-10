@@ -93,7 +93,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" type="button" @click="RDA=true;record._336a='text'"> 
+            <a class="nav-link" type="button" @click="RDA=true;record._336a='text';record._337a='unmediated'"> 
               <span data-feather="layers"></span>             
               Enable RDA fields
             </a>
@@ -2152,6 +2152,34 @@
                             </div>
                             <!-- \336 -->
 
+                            <!-- 337 -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="_300">337 - Media Type&nbsp;&nbsp;
+                                    <a href="https://www.loc.gov/marc/bibliographic/bd337.html" rel="external" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                    </a>
+                                </span>
+                                <select class="input-group-text form-select " id="_337a" v-model="record._337a">
+                                    <option disabled>RDA media terms</option>
+                                    <option value="audio">audio</option>
+                                    <option value="computer">computer</option>
+                                    <option value="microform">microform</option>
+                                    <option value="microscopic">microscopic</option>
+                                    <option value="projected">projected</option>
+                                    <option value="stereographic">stereographic</option>
+                                    <option value="unmediated">unmediated</option>
+                                    <option value="video">video</option>
+                                    <option value="other">other</option>
+                                    <option value="unspecified">unspecified</option>
+                                </select>
+                                <input type="text" id="_337b" v-model="_336b" class="form-control" placeholder="MARC code for RDA terms" aria-label="MARC code for RDA terms" aria-describedby="_337b" disabled>
+                                <input type="text" id="_3372" v-model="record._3372" class="form-control" placeholder="Source" aria-label="Source" aria-describedby="_3372" disabled>
+                            </div>
+                            <!-- \336 -->
+
                         </div>
 
                         <!-- 500 -->
@@ -2377,6 +2405,8 @@
                     _310a: null,
                     _336a: null,
                     _3362: 'rdacontent',
+                    _337a: null,
+                    _3372: 'rdamedia',
                     general_note: [],
                     general_note_array: [],
                     _650: [],
@@ -2392,7 +2422,8 @@
                 i_personal_name: 1,
                 errors: null,
                 RDA: false,
-                _336b: null
+                _336b: null,
+                _337b: null
 
             },
             computed: {
@@ -2457,7 +2488,8 @@
                     '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
                     (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
                     (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') +   
-                    (this.record._336a ? '\n=336 ##$a' + this.record._336a + (this._336b ? '$b' + this._336b : '') + '$2' + this.record._3362 : '') +  
+                    (this.record._336a ? '\n=336 ##$a' + this.record._336a + (this._336b ? '$b' + this._336b : '') + '$2' + this.record._3362 : '') +
+                    (this.record._337a ? '\n=337 ##$a' + this.record._337a + (this._337b ? '$b' + this._337b : '') + '$2' + this.record._3372 : '') +  
                     this.record.general_note_array.join("") +
                     this.record._650_array.join("") +
                     this.record.personal_names_array.join("") +
@@ -2541,6 +2573,43 @@
                             break;
                         case "unspecified":
                             return 'zzz'; 
+                            break;
+                        default:
+                        return null;
+                    }
+
+                },
+                _337b: function (){
+                    switch (this.record._337a) {
+                        case "audio":
+                            return 's'; 
+                            break;
+                        case "computer":
+                            return 'c'; 
+                            break;
+                        case "microform":
+                            return 'h'; 
+                            break;
+                        case "microscopic":
+                            return 'p'; 
+                            break;
+                        case "projected":
+                            return 'g'; 
+                            break;
+                        case "stereographic":
+                            return 'e'; 
+                            break;
+                        case "unmediated":
+                            return 'n'; 
+                            break;
+                        case "video":
+                            return 'v'; 
+                            break;
+                        case "other":
+                            return 'x'; 
+                            break;
+                        case "unspecified":
+                            return 'z'; 
                             break;
                         default:
                         return null;
