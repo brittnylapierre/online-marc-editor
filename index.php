@@ -9,7 +9,7 @@
     <title>Online MARC Editor</title>
     
     <!-- Facebook Open Graph -->
-    <meta property="og:title" content="Online MARC Editor" />
+    <meta property="og:title" content="Online MARC Editor" />    
 
     <link rel="canonical" href="https://online-marc-editor.herokuapp.com">
 
@@ -90,6 +90,12 @@
             <a class="nav-link" type="button" @click="recordType='Serial';record.ldr.bibliographic_level='s';record.ldr.type_of_record='a';record.f008.p19='r';record.f008.p21='p';record.f008.p33='#';record.f008.p34='0'"> 
               <span data-feather="layers"></span>             
               Serial
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" type="button" @click="RDA=true;record._336a='text'"> 
+              <span data-feather="layers"></span>             
+              Enable RDA fields
             </a>
           </li>
         </ul>
@@ -2100,6 +2106,54 @@
                         </div>
                         <!-- \310 -->
 
+                        <div v-if="RDA === true">
+
+                            <!-- 336 -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="_300">336 - Content Type&nbsp;&nbsp;
+                                    <a href="https://www.loc.gov/marc/bibliographic/bd336.html" rel="external" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                    </a>
+                                </span>
+
+                                <select class="input-group-text form-select " id="_336a" v-model="record._336a">
+                                    <option disabled>RDA content term</option>
+                                    <option value="cartographic dataset">cartographic dataset</option>
+                                    <option value="cartographic image">cartographic image</option>
+                                    <option value="cartographic moving image">cartographic moving image</option>
+                                    <option value="cartographic tactile image">cartographic tactile image</option>
+                                    <option value="cartographic tactile three-dimensional form">cartographic tactile three-dimensional form</option>
+                                    <option value="cartographic three-dimensional form">cartographic three-dimensional form</option>
+                                    <option value="computer dataset">computer dataset</option>
+                                    <option value="computer program">computer program</option>
+                                    <option value="notated movement">notated movement</option>
+                                    <option value="notated music">notated music</option>
+                                    <option value="performed music">performed music</option>
+                                    <option value="sounds">sounds</option>
+                                    <option value="spoken word">spoken word</option>
+                                    <option value="still image">still image</option>
+                                    <option value="tactile image">tactile image</option>
+                                    <option value="tactile notated music">tactile notated music</option>
+                                    <option value="tactile notated movement">tactile notated movement</option>
+                                    <option value="tactile text">tactile text</option>
+                                    <option value="tactile three-dimensional form">tactile three-dimensional form</option>
+                                    <option value="text">text</option>
+                                    <option value="three-dimensional form">three-dimensional form</option>
+                                    <option value="three-dimensional moving image">three-dimensional moving image</option>
+                                    <option value="two-dimensional moving image">two-dimensional moving image</option>
+                                    <option value="other">other</option>
+                                    <option value="unspecified">unspecified</option>
+                                </select>
+                                <input type="text" id="_336b" v-model="_336b" class="form-control" placeholder="Content type code" aria-label="Content type code" aria-describedby="_336b" disabled>
+                                <input type="text" id="_3362" v-model="record._3362" class="form-control" placeholder="Source" aria-label="Source" aria-describedby="_3362" disabled>
+                            </div>
+                            <!-- \336 -->
+
+                        </div>
+
                         <!-- 500 -->
 
                         <div class="input-group mb-2" v-for="(note, indexNote) in record.general_note">
@@ -2321,6 +2375,8 @@
                     _300b: null,
                     _300c: null,
                     _310a: null,
+                    _336a: null,
+                    _3362: 'rdacontent',
                     general_note: [],
                     general_note_array: [],
                     _650: [],
@@ -2334,7 +2390,9 @@
                 loadingISBN: false,
                 loadingZ3950: false,
                 i_personal_name: 1,
-                errors: null
+                errors: null,
+                RDA: false,
+                _336b: null
 
             },
             computed: {
@@ -2398,14 +2456,98 @@
                     (this.record._260b ? '$b' + this.record._260b : '') + (this.record._260c ? '$c' + this.record._260c : '') +
                     '\n=300  ' + this.record._300_ind1 + this.record._300_ind2 + (this.record._300a ? '$a' + this.record._300a : '') + 
                     (this.record._300b ? '$b' + this.record._300b : '') + (this.record._300c ? '$c' + this.record._300c : '') +
-                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') +                     
+                    (this.record._310a ? '\n=310 ##$a' + this.record._310a : '') +   
+                    (this.record._336a ? '\n=336 ##$a' + this.record._336a + (this._336b ? '$b' + this._336b : '') + '$2' + this.record._3362 : '') +  
                     this.record.general_note_array.join("") +
                     this.record._650_array.join("") +
                     this.record.personal_names_array.join("") +
                     this.record.corporate_names_array.join("") +
                     this.record._856_array.join("")
 
-                }
+                },
+                _336b: function (){
+                    switch (this.record._336a) {
+                        case "cartographic dataset":
+                            return 'crd'; 
+                            break;
+                        case "cartographic image":
+                            return 'cri'; 
+                            break;
+                        case "cartographic moving image":
+                            return 'crm'; 
+                            break;
+                        case "cartographic tactile image":
+                            return 'crt'; 
+                            break;
+                        case "cartographic tactile three-dimensional form":
+                            return 'crn'; 
+                            break;
+                        case "cartographic three-dimensional form":
+                            return 'crf'; 
+                            break;
+                        case "computer dataset":
+                            return 'cod'; 
+                            break;
+                        case "computer program":
+                            return 'cop'; 
+                            break;
+                        case "notated movement":
+                            return 'ntv'; 
+                            break;
+                        case "notated music":
+                            return 'ntm'; 
+                            break;
+                        case "performed music":
+                            return 'prm'; 
+                            break;
+                        case "sounds":
+                            return 'snd'; 
+                            break;
+                        case "spoken word":
+                            return 'spw'; 
+                            break;
+                        case "still image":
+                            return 'sti'; 
+                            break;
+                        case "tactile image":
+                            return 'tci'; 
+                            break;
+                        case "tactile notated music":
+                            return 'tcm'; 
+                            break;
+                        case "tactile notated movement":
+                            return 'tcn'; 
+                            break;
+                        case "tactile text":
+                            return 'tct'; 
+                            break;
+                        case "tactile three-dimensional form":
+                            return 'tcf'; 
+                            break;
+                        case "text":
+                            return 'txt'; 
+                            break;
+                        case "three-dimensional form":
+                            return 'tdf'; 
+                            break;
+                        case "three-dimensional moving image":
+                            return 'tdm'; 
+                            break;
+                        case "two-dimensional moving image":
+                            return 'tdi'; 
+                            break;
+                        case "other":
+                            return 'xxx'; 
+                            break;
+                        case "unspecified":
+                            return 'zzz'; 
+                            break;
+                        default:
+                        return null;
+                    }
+
+                } 
+
             },
             mounted() {
                 this.update005()
