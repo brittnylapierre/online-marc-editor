@@ -2000,7 +2000,7 @@
                         <!-- TITLE -->
                         <div class="row mb-3">
                             <div class="col-2">
-                                <span class="input-group-text" id="title">Title statement&nbsp;&nbsp;
+                                <span class="input-group-text" id="title">{{ translation._245 }}&nbsp;&nbsp;
                                     <a href="https://www.loc.gov/marc/bibliographic/bd245.html" rel="external" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -2424,6 +2424,7 @@
                     _008: '008 - Fixed-Length Data Elements-General Information',
                     _040a: 'Original cataloging agency',
                     _040c: 'Transcribing agency',
+                    _245: 'Title statement',
                     add_personal_name: 'Add Personal Name',
                     add_rda_fields: 'Add RDA fields (336, 337, 338)',
                     book: 'Book',
@@ -2439,6 +2440,7 @@
                     _008: '008 - Campo de tamanho fixo',
                     _040a: 'Código da Agência Catalogadora',
                     _040c: 'Agência que transcreveu o registro em formato legível por máquina',
+                    _245: 'Título Principal',
                     add_personal_name: 'Adicionar Nome pessoal',         
                     add_rda_fields: 'Adicionar campos RDA (336, 337, 338)',
                     book: 'Livro',
