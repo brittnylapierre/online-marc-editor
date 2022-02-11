@@ -1900,7 +1900,7 @@
 
                         <!-- 003 -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="_003">Control Number Identifier&nbsp;&nbsp;
+                            <span class="input-group-text" id="_003">{{ translation.control_number_identifier }}&nbsp;&nbsp;
                                 <a href="https://www.loc.gov/marc/bibliographic/bd003.html" rel="external" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1908,7 +1908,7 @@
                                 </svg>
                                 </a>
                             </span>
-                            <input type="text" id="_003" v-model="record._003" class="form-control" placeholder="Control Number Identifier" aria-label="Control Number Identifier" aria-describedby="_003">
+                            <input type="text" id="_003" v-model="record._003" class="form-control" :placeholder="translation.control_number_identifier" :aria-label="translation.control_number_identifier" aria-describedby="_003">
                         </div>
                         <!-- \003 -->
 
@@ -2425,6 +2425,7 @@
                     add_rda_fields: 'Add RDA fields (336, 337, 338)',
                     book: 'Book',
                     control_number: 'Control Number',
+                    control_number_identifier: 'Control Number Identifier',
                     edit_fields: 'Edit fields',
                     leader: 'Leader',
                     predefined_types: 'Predefined types',                
@@ -2435,6 +2436,7 @@
                     add_rda_fields: 'Adicionar campos RDA (336, 337, 338)',
                     book: 'Livro',
                     control_number: 'Número de controle',
+                    control_number_identifier: 'Código MARC da Agência Catalogadora',
                     edit_fields: 'Editar campos',
                     leader: 'Líder',
                     predefined_types: 'Tipos predefinidos',
