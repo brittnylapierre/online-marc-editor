@@ -2031,16 +2031,16 @@
                                 </select>
                             </div>
                             <div class="input-group">
-                                <span class="input-group-text" id="title">Title</span>
-                                <input type="text" id="title" v-model="record.title" class="form-control" :class="validation._245a" placeholder="Title" aria-label="Title" aria-describedby="title">
+                                <span class="input-group-text" id="title">{{ translation._245a }}</span>
+                                <input type="text" id="title" v-model="record.title" class="form-control" :class="validation._245a" :placeholder="translation._245a" :aria-label="translation._245a" aria-describedby="title">
                             </div>
                             <div class="input-group">
-                                <span class="input-group-text" id="subtitle">Subtitle</span>
-                                <input type="text" id="subtitle" v-model="record.subtitle" class="form-control" placeholder="Subtitle statement" aria-label="Subtitle statement" aria-describedby="subtitle">
+                                <span class="input-group-text" id="subtitle">{{ translation._245b }}</span>
+                                <input type="text" id="subtitle" v-model="record.subtitle" class="form-control" :placeholder="translation._245b" :aria-label="translation._245b" aria-describedby="subtitle">
                             </div>
                             <div class="input-group">
-                                <span class="input-group-text" id="245c">Statement of responsibility, etc.</span>
-                                <input type="text" id="245c" v-model="record._245c" class="form-control" placeholder="Statement of responsibility, etc." aria-label="Statement of responsibility, etc." aria-describedby="245c">
+                                <span class="input-group-text" id="245c">{{ translation._245c }}</span>
+                                <input type="text" id="245c" v-model="record._245c" class="form-control" :placeholder="translation._245c" :aria-label="translation._245c" aria-describedby="245c">
                             </div>
                             
                             
@@ -2425,6 +2425,9 @@
                     _040a: 'Original cataloging agency',
                     _040c: 'Transcribing agency',
                     _245: 'Title statement',
+                    _245a: 'Title',
+                    _245b: 'Remainder of title',
+                    _245c: 'Statement of responsibility, etc.',
                     add_personal_name: 'Add Personal Name',
                     add_rda_fields: 'Add RDA fields (336, 337, 338)',
                     book: 'Book',
@@ -2441,6 +2444,9 @@
                     _040a: 'Código da Agência Catalogadora',
                     _040c: 'Agência que transcreveu o registro em formato legível por máquina',
                     _245: 'Título Principal',
+                    _245a: 'Título principal',
+                    _245b: 'Subtítulo',
+                    _245c: 'Indicação de responsabilidade',
                     add_personal_name: 'Adicionar Nome pessoal',         
                     add_rda_fields: 'Adicionar campos RDA (336, 337, 338)',
                     book: 'Livro',
