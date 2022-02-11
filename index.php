@@ -2019,7 +2019,7 @@
                             </div>
                             <div class="input-group-prepend">
                                 <select class="input-group-text form-select" id="_245_ind2" v-model="record._245_ind2">
-                                    <option disabled>Nonfiling characters</option>
+                                    <option disabled>{{ translation._2452 }}</option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -2056,7 +2056,7 @@
 
                         <!-- 260 -->
                         <div class="input-group mb-3 col">
-                            <span class="input-group-text col-md-1" id="title">Imprint&nbsp;&nbsp;
+                            <span class="input-group-text col-md-1" id="Imprint">{{ translation._260 }}&nbsp;&nbsp;
                                 <a href="https://www.loc.gov/marc/bibliographic/bd260.html" rel="external" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -2066,15 +2066,15 @@
                             </span>
                             <div class="input-group-prepend col-md-2">
                                 <select class="input-group-text form-select" id="_260_ind1" v-model="record._260_ind1">
-                                    <option disabled>Sequence of publishing statements</option>
-                                    <option value="#"># - Not applicable/No information provided/Earliest available publisher</option>
-                                    <option value="2">2 - Intervening publisher</option>
-                                    <option value="3">3 - Current/latest publisher</option>
+                                    <option disabled>{{ translation._2601 }}</option>
+                                    <option value="#">{{ translation._2601_ }}</option>
+                                    <option value="2">{{ translation._26012 }}</option>
+                                    <option value="3">{{ translation._26013 }}</option>
                                 </select>
                             </div>
-                            <input type="text" id="_260a" v-model="record._260a" class="form-control col-md-3" placeholder="Place of publication" aria-label="Place of publication" aria-describedby="_260a">
-                            <input type="text" id="_260b" v-model="record._260b" class="form-control col-md-3" placeholder="Name of publisher" aria-label="Name of publisher" aria-describedby="_260b">
-                            <input type="text" id="_260c" v-model="record._260c" class="form-control col-md-3" placeholder="Date of publication" aria-label="Date of publication" aria-describedby="_260c">
+                            <input type="text" id="_260a" v-model="record._260a" class="form-control col-md-3" :placeholder="translation._260a" :aria-label="translation._260a" aria-describedby="_260a">
+                            <input type="text" id="_260b" v-model="record._260b" class="form-control col-md-3" :placeholder="translation._260b" :aria-label="translation._260b" aria-describedby="_260b">
+                            <input type="text" id="_260c" v-model="record._260c" class="form-control col-md-3" :placeholder="translation._260c" :aria-label="translation._260c" aria-describedby="_260c">
                         </div>
                         <!-- \260 -->
 
@@ -2428,9 +2428,18 @@
                     _2451: 'Title added entry',
                     _24510: 'No added entry',
                     _24511: 'Added entry',
+                    _2452: 'Nonfiling characters',
                     _245a: 'Title',
                     _245b: 'Remainder of title',
                     _245c: 'Statement of responsibility, etc.',
+                    _260: 'Imprint',
+                    _2601: 'Sequence of publishing statements',
+                    _2601_: '# - Not applicable/No information provided/Earliest available publisher',
+                    _26012: '2 - Intervening publisher',
+                    _26013: '3 - Current/latest publisher',
+                    _260a: 'Place of publication',
+                    _260b: 'Name of publisher',
+                    _260c: 'Date of publication',
                     add_personal_name: 'Add Personal Name',
                     add_rda_fields: 'Add RDA fields (336, 337, 338)',
                     book: 'Book',
@@ -2450,9 +2459,18 @@
                     _2451: 'Entrada secundária de título',
                     _24510: 'Não gera entrada secundária',
                     _24511: 'Gera entrada secundária',
+                    _2452: 'Caracteres a serem desprezados',
                     _245a: 'Título principal',
                     _245b: 'Subtítulo',
                     _245c: 'Indicação de responsabilidade',
+                    _260: 'Imprenta',
+                    _2601: 'Informações editoriais',
+                    _2601_: '# - Não se aplica/nenhuma informação fornecida/editor mais antigo',
+                    _26012: '2 - Editor intermediário',
+                    _26013: '3 - Editor atual',
+                    _260a: 'Lugar de publicação, distribuição, etc.',
+                    _260b: 'Nome do editor, distribuidor, etc.',
+                    _260c: 'Data de publicação, distribuição, etc.',
                     add_personal_name: 'Adicionar Nome pessoal',         
                     add_rda_fields: 'Adicionar campos RDA (336, 337, 338)',
                     book: 'Livro',
