@@ -2012,9 +2012,9 @@
                             <div class="col-10">
                             <div class="input-group-prepend">
                                 <select class="input-group-text form-select" id="_245_ind1" v-model="record._245_ind1">
-                                    <option disabled>Title added entry</option>
-                                    <option value="0">No added entry</option>
-                                    <option value="1">Added entry</option>
+                                    <option disabled>{{ translation._2451 }}</option>
+                                    <option value="0">{{ translation._24510 }}</option>
+                                    <option value="1">{{ translation._24511 }}</option>
                                 </select>
                             </div>
                             <div class="input-group-prepend">
@@ -2425,6 +2425,9 @@
                     _040a: 'Original cataloging agency',
                     _040c: 'Transcribing agency',
                     _245: 'Title statement',
+                    _2451: 'Title added entry',
+                    _24510: 'No added entry',
+                    _24511: 'Added entry',
                     _245a: 'Title',
                     _245b: 'Remainder of title',
                     _245c: 'Statement of responsibility, etc.',
@@ -2444,6 +2447,9 @@
                     _040a: 'Código da Agência Catalogadora',
                     _040c: 'Agência que transcreveu o registro em formato legível por máquina',
                     _245: 'Título Principal',
+                    _2451: 'Entrada secundária de título',
+                    _24510: 'Não gera entrada secundária',
+                    _24511: 'Gera entrada secundária',
                     _245a: 'Título principal',
                     _245b: 'Subtítulo',
                     _245c: 'Indicação de responsabilidade',
@@ -2456,7 +2462,7 @@
                     edit_fields: 'Editar campos',
                     leader: 'Líder',
                     predefined_types: 'Tipos predefinidos',
-                    serial: 'Periódico'
+                    serial: 'Periódico'        
                 },
                 record: {
                     ldr:{
