@@ -83,13 +83,13 @@
           <li class="nav-item">
             <a class="nav-link" type="button" @click="recordType='Book';record.ldr.bibliographic_level='m';record.ldr.type_of_record='a';record.f008.p19='#';record.f008.p21='#';record.f008.p33='0';record.f008.p34='#'">
               <span data-feather="book"></span>                         
-              Book
+              {{ translation.book }}
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" type="button" @click="recordType='Serial';record.ldr.bibliographic_level='s';record.ldr.type_of_record='a';record.f008.p19='r';record.f008.p21='p';record.f008.p33='#';record.f008.p34='0'"> 
               <span data-feather="layers"></span>             
-              Serial
+              {{ translation.serial }}
             </a>
           </li>
         </ul>
@@ -101,7 +101,7 @@
           <li class="nav-item">
             <a class="nav-link" v-on:click="ldrShow = !ldrShow" type="button">
               <span data-feather="file-text"></span>
-              Leader
+              {{ translation.leader }}
             </a>
           </li>
           <li class="nav-item">
@@ -137,6 +137,8 @@
         <h1 class="h2">Editor</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-warning" @click="translate('pt_BR')">Português</button>
+            <button type="button" class="btn btn-sm btn-outline-warning" @click="translate('en_US')">English</button>
             <button type="button" class="btn btn-sm btn-outline-warning" @click="validate()">Validate</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" @click="validation._245a='', errors = null">Clear validation</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" @click="cleanAll()">Clear all record</button>
@@ -2417,6 +2419,17 @@
                 ISBNRecord: null,
                 Z3950Records: null,
                 recordType: 'Book',
+                translation: [],
+                translation_pt_BR: {
+                    leader: 'Líder',
+                    book: 'Livro',
+                    serial: 'Periódico'
+                },
+                translation_en_US: {
+                    leader: 'Leader',
+                    book: 'Book',
+                    serial: 'Serial'
+                },
                 record: {
                     ldr:{
                         record_length: '00000',
@@ -2862,7 +2875,8 @@
 
             },
             mounted() {
-                this.update005()
+                this.update005();
+                this.translation = this.translation_en_US;
             },
             methods: {
                 addField: function (field) {
@@ -2982,6 +2996,18 @@
                     this.errored = true;
                     })
                     .finally(() => (this.loadingZ3950 = false));
+                },
+                translate(language) {
+                    switch (language) {
+                        case "pt_BR":
+                            this.translation = this.translation_pt_BR;
+                            break;
+                        case "en_US":
+                            this.translation = this.translation_en_US;
+                            break;
+                        default:
+                            this.translation = this.translation_en_US;
+                    }
                 },
                 update005() {
                     let today = new Date().toISOString().replace('-', '').replace('-', '').replace('T', '').replace(':', '').replace(':', '').substr(0,16);
