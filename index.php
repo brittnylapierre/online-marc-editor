@@ -1922,8 +1922,8 @@
                                 </svg>
                                 </a>
                             </span>
-                            <input type="text" id="_040a" v-model="record._040a" class="form-control" placeholder="Original cataloging agency" aria-label="Original cataloging agency" aria-describedby="_040a">
-                            <input type="text" id="_040c" v-model="record._040c" class="form-control" placeholder="Transcribing agency" aria-label="Transcribing agency" aria-describedby="_040c">
+                            <input type="text" id="_040a" v-model="record._040a" class="form-control" :placeholder="translation._040a" :aria-label="translation._040a" aria-describedby="_040a">
+                            <input type="text" id="_040c" v-model="record._040c" class="form-control" :placeholder="translation._040c" :aria-label="translation._040c" aria-describedby="_040c">
                         </div>
                         <!-- \040 -->
 
@@ -1961,7 +1961,7 @@
                             </div>
 
                             <button @click="addField('personal_name')" class="btn btn-info btn-sm mb-2">
-                            Add Personal Name
+                            {{ translation.add_personal_name }}
                             </button>
                         </template>
                         <!-- \100 -->
@@ -2422,6 +2422,9 @@
                 translation: [],
                 translation_en_US: {
                     _008: '008 - Fixed-Length Data Elements-General Information',
+                    _040a: 'Original cataloging agency',
+                    _040c: 'Transcribing agency',
+                    add_personal_name: 'Add Personal Name',
                     add_rda_fields: 'Add RDA fields (336, 337, 338)',
                     book: 'Book',
                     cataloging_source: 'Cataloging Source',
@@ -2434,6 +2437,9 @@
                 },
                 translation_pt_BR: {
                     _008: '008 - Campo de tamanho fixo',
+                    _040a: 'Código da Agência Catalogadora',
+                    _040c: 'Agência que transcreveu o registro em formato legível por máquina',
+                    add_personal_name: 'Adicionar Nome pessoal',         
                     add_rda_fields: 'Adicionar campos RDA (336, 337, 338)',
                     book: 'Livro',
                     cataloging_source: 'Fonte da Catalogação',
