@@ -107,7 +107,7 @@
           <li class="nav-item">
             <a class="nav-link" v-on:click="f008Show = !f008Show" type="button">
               <span data-feather="file-text"></span>
-              008 - Fixed-Length Data Elements-General Information
+              {{ translation._008 }}
             </a>
           </li>
           <li class="nav-item">
@@ -124,8 +124,8 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" type="button" @click="RDA=true;record._336a='text';record._337a='unmediated';record._338a='object'">
-              <span data-feather="layers"></span>             
-              Add RDA fields (336, 337, 338)
+              <span data-feather="layers"></span>
+              {{ translation.add_rda_fields }}
             </a>
           </li>
         </ul>
@@ -137,8 +137,8 @@
         <h1 class="h2">Editor</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-warning" @click="translate('pt_BR')">Português</button>
-            <button type="button" class="btn btn-sm btn-outline-warning" @click="translate('en_US')">English</button>
+            <button type="button" class="btn btn-sm btn-outline-info" @click="translate('pt_BR')">Português</button>
+            <button type="button" class="btn btn-sm btn-outline-info" @click="translate('en_US')">English</button>
             <button type="button" class="btn btn-sm btn-outline-warning" @click="validate()">Validate</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" @click="validation._245a='', errors = null">Clear validation</button>
             <button type="button" class="btn btn-sm btn-outline-secondary" @click="cleanAll()">Clear all record</button>
@@ -1886,7 +1886,7 @@
 
                         <!-- 001 -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="_001">Control Number&nbsp;&nbsp;
+                            <span class="input-group-text" id="_001">{{ translation.control_number }}&nbsp;&nbsp;
                                 <a href="https://www.loc.gov/marc/bibliographic/bd001.html" rel="external" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -1894,7 +1894,7 @@
                                 </svg>
                                 </a>
                             </span>
-                            <input type="text" id="_001" v-model="record._001" class="form-control" placeholder="Control Number" aria-label="Control Number" aria-describedby="_001">
+                            <input type="text" id="_001" v-model="record._001" class="form-control" :placeholder="translation.control_number" :aria-label="translation.control_number" aria-describedby="_001">
                         </div>
                         <!-- \001 -->
 
@@ -2420,19 +2420,25 @@
                 Z3950Records: null,
                 recordType: 'Book',
                 translation: [],
-                translation_pt_BR: {
-                    book: 'Livro',
-                    edit_fields: 'Editar campos',
-                    leader: 'Líder',
-                    predefined_types: 'Tipos predefinidos',
-                    serial: 'Periódico'
-                },
                 translation_en_US: {
+                    _008: '008 - Fixed-Length Data Elements-General Information',
+                    add_rda_fields: 'Add RDA fields (336, 337, 338)',
                     book: 'Book',
+                    control_number: 'Control Number',
                     edit_fields: 'Edit fields',
                     leader: 'Leader',
                     predefined_types: 'Predefined types',                
                     serial: 'Serial'
+                },
+                translation_pt_BR: {
+                    _008: '008 - Campo de tamanho fixo',
+                    add_rda_fields: 'Adicionar campos RDA (336, 337, 338)',
+                    book: 'Livro',
+                    control_number: 'Número de controle',
+                    edit_fields: 'Editar campos',
+                    leader: 'Líder',
+                    predefined_types: 'Tipos predefinidos',
+                    serial: 'Periódico'
                 },
                 record: {
                     ldr:{
