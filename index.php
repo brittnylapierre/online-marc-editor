@@ -77,7 +77,7 @@
     <nav id="sidebarMenu" class="col-md-2 col-lg-1 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Predefined types</span>
+          <span>{{ translation.predefined_types }}</span>
         </h6>
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -95,7 +95,7 @@
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Edit fields</span>
+          <span>{{ translation.edit_fields }}</span>
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
@@ -2421,13 +2421,17 @@
                 recordType: 'Book',
                 translation: [],
                 translation_pt_BR: {
-                    leader: 'Líder',
                     book: 'Livro',
+                    edit_fields: 'Editar campos',
+                    leader: 'Líder',
+                    predefined_types: 'Tipos predefinidos',
                     serial: 'Periódico'
                 },
                 translation_en_US: {
-                    leader: 'Leader',
                     book: 'Book',
+                    edit_fields: 'Edit fields',
+                    leader: 'Leader',
+                    predefined_types: 'Predefined types',                
                     serial: 'Serial'
                 },
                 record: {
