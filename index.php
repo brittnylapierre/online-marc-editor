@@ -2080,7 +2080,7 @@
 
                         <!-- 300 -->
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="_300">Physical Description&nbsp;&nbsp;
+                            <span class="input-group-text" id="_300">{{ translation._300 }}&nbsp;&nbsp;
                                 <a href="https://www.loc.gov/marc/bibliographic/bd300.html" rel="external" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -2440,6 +2440,7 @@
                     _260a: 'Place of publication',
                     _260b: 'Name of publisher',
                     _260c: 'Date of publication',
+                    _300:'Physical Description',
                     add_personal_name: 'Add Personal Name',
                     add_rda_fields: 'Add RDA fields (336, 337, 338)',
                     book: 'Book',
@@ -2471,6 +2472,7 @@
                     _260a: 'Lugar de publicação, distribuição, etc.',
                     _260b: 'Nome do editor, distribuidor, etc.',
                     _260c: 'Data de publicação, distribuição, etc.',
+                    _300:'Physical Description',
                     add_personal_name: 'Adicionar Nome pessoal',         
                     add_rda_fields: 'Adicionar campos RDA (336, 337, 338)',
                     book: 'Livro',
