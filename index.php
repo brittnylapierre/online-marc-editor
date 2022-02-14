@@ -2088,9 +2088,9 @@
                                 </svg>
                                 </a>
                             </span>
-                            <input type="text" id="_300a" v-model="record._300a" class="form-control" placeholder="Extent" aria-label="Extent" aria-describedby="_300a">
-                            <input type="text" id="_300b" v-model="record._300b" class="form-control" placeholder="Other physical details" aria-label="Other physical details" aria-describedby="_300b">
-                            <input type="text" id="_300c" v-model="record._300c" class="form-control" placeholder="Dimensions" aria-label="Dimensions" aria-describedby="_300c">
+                            <input type="text" id="_300a" v-model="record._300a" class="form-control" :placeholder="translation._300a" :aria-label="translation._300a" aria-describedby="_300a">
+                            <input type="text" id="_300b" v-model="record._300b" class="form-control" :placeholder="translation._300b" :aria-label="translation._300b" aria-describedby="_300b">
+                            <input type="text" id="_300c" v-model="record._300c" class="form-control" :placeholder="translation._300c" :aria-label="translation._300c" aria-describedby="_300c">
                         </div>
                         <!-- \300 -->
 
@@ -2440,7 +2440,10 @@
                     _260a: 'Place of publication',
                     _260b: 'Name of publisher',
                     _260c: 'Date of publication',
-                    _300:'Physical Description',
+                    _300: 'Physical Description',
+                    _300a: 'Extent',
+                    _300b: 'Other physical details',
+                    _300c: 'Dimensions',
                     add_personal_name: 'Add Personal Name',
                     add_rda_fields: 'Add RDA fields (336, 337, 338)',
                     book: 'Book',
@@ -2472,7 +2475,10 @@
                     _260a: 'Lugar de publicação, distribuição, etc.',
                     _260b: 'Nome do editor, distribuidor, etc.',
                     _260c: 'Data de publicação, distribuição, etc.',
-                    _300:'Physical Description',
+                    _300: 'Descrição física',
+                    _300a: 'Extensão',
+                    _300b: 'Detalhes físicos adicionais',
+                    _300c: 'Dimensões',
                     add_personal_name: 'Adicionar Nome pessoal',         
                     add_rda_fields: 'Adicionar campos RDA (336, 337, 338)',
                     book: 'Livro',
